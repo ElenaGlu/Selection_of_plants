@@ -7,6 +7,7 @@ def get_data(html):
     driver.get(url)
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     driver.quit()
+    print(1)
     for link in soup.find_all('a', class_='title'):
         print('https://leplants.ru' + link.get('href'))
 def main():
