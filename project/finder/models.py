@@ -4,6 +4,15 @@ from django.db import models
 class HousePlants(models.Model):
     name_of_plant = models.CharField(max_length=50)
 
+    homeland = models.CharField(max_length=20)
+
+    soil = models.CharField(max_length=100)
+
+    min_height = models.PositiveIntegerField()
+    max_height = models.PositiveIntegerField()
+
+    flowering_time = models.CharField(max_length=50)
+
     LEAF_COLOR_CHOICES = [
         ('WH', 'White'), ('BL', 'Blue'),
         ('YE', 'Yellow'), ('GR', 'Green'),
@@ -14,12 +23,12 @@ class HousePlants(models.Model):
     ]
     leaf_color = models.CharField(max_length=2, choices=LEAF_COLOR_CHOICES)
 
-    LEVEL_OF_CARE_CHOICES = [
-        ('S', 'Не нуждается в особых требованиях для роста и цветения'),
-        ('M', 'В целом неприхотливо, может предъявлять особые для данного вида требования'),
-        ('L', 'Требовательно в уходе')
+    LIGHT_LEVEL_CHOICES = [
+        ('S', 'Теневыносливо'),
+        ('M', 'Допустимы прямые лучи несколько часов, восточная, западная ориентация'),
+        ('L', 'Западная, южная ориентация, может потребовать несколько часов прямых солнечных лучей')
     ]
-    level_of_care = models.CharField(max_length=1, choices=LEVEL_OF_CARE_CHOICES)
+    light_level = models.CharField(max_length=1, choices=LIGHT_LEVEL_CHOICES)
 
     IRRIGATION_LEVEL_CHOICES = [
         ('S', 'Засухоустойчиво'),
@@ -28,19 +37,12 @@ class HousePlants(models.Model):
     ]
     irrigation_level = models.CharField(max_length=1, choices=IRRIGATION_LEVEL_CHOICES)
 
-    LIGHT_LEVEL_CHOICES = [
-        ('S', 'Теневыносливо'),
-        ('M', 'Допустимы прямые лучи несколько часов, восточная, западная ориентация'),
-        ('L', 'Западная, южная ориентация, может потребовать несколько часов прямых солнечных лучей')
+    LEVEL_OF_CARE_CHOICES = [
+        ('S', 'Не нуждается в особых требованиях для роста и цветения'),
+        ('M', 'В целом неприхотливо, может предъявлять особые для данного вида требования'),
+        ('L', 'Требовательно в уходе')
     ]
-    light_level = models.CharField(max_length=1, choices=LIGHT_LEVEL_CHOICES)
-
-    FEEDING_CHOICES = [
-        ('S', 'Достаточно питательных веществ из собственной почвы или редкого удобрения'),
-        ('M', 'Удобрение только в период активного роста'),
-        ('L', 'Требует частого удобрения (в том числе круглый год)')
-    ]
-    feeding = models.CharField(max_length=1, choices=FEEDING_CHOICES)
+    level_of_care = models.CharField(max_length=1, choices=LEVEL_OF_CARE_CHOICES)
 
     HUMIDITY_CHOICES = [
         ('S', 'Нетребовательно к влажности воздуха'),
@@ -49,20 +51,24 @@ class HousePlants(models.Model):
     ]
     humidity = models.CharField(max_length=1, choices=HUMIDITY_CHOICES)
 
-    TEMP_CHOICES = [
+    FEEDING_CHOICES = [
+        ('S', 'Достаточно питательных веществ из собственной почвы или редкого удобрения'),
+        ('M', 'Удобрение только в период активного роста'),
+        ('L', 'Требует частого удобрения (в том числе круглый год)')
+    ]
+    feeding = models.CharField(max_length=1, choices=FEEDING_CHOICES)
+
+    TEMPERATURE_CHOICES = [
         ('5', 'холодное содержание (+5 — +18°C)'),
         ('18', 'умеренно-теплое содержание (+18 — +25°C)'),
         ('22', 'теплое содержание (+22 — +27°C)'),
         ('-', 'отсутствует')
     ]
-    temp = models.CharField(max_length=2, choices=TEMP_CHOICES)
-
-    min_height = models.PositiveIntegerField()
-    max_height = models.PositiveIntegerField()
+    temperature = models.CharField(max_length=2, choices=TEMP_CHOICES)
 
     pic_of_plant = models.ImageField()
+
     content_or_description = models.TextField()
 
-    flowering_time = models.CharField(max_length=100)
-    soil = models.CharField(max_length=100)
+
 
