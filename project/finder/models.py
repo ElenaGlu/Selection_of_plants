@@ -4,7 +4,7 @@ from django.db import models
 class HousePlants(models.Model):
     name_of_plant = models.CharField(max_length=50)
 
-    homeland = models.CharField(max_length=20)
+    homeland = models.CharField(max_length=20, default='')
 
     soil = models.CharField(max_length=100)
 
@@ -64,7 +64,7 @@ class HousePlants(models.Model):
         ('22', 'теплое содержание (+22 — +27°C)'),
         ('-', 'отсутствует')
     ]
-    temperature = models.CharField(max_length=2, choices=TEMP_CHOICES)
+    temperature = models.CharField(max_length=2, choices=TEMPERATURE_CHOICES)
 
     pic_of_plant = models.ImageField()
 
