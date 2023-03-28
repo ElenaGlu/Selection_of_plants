@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
-
+import json
+import time
 
 list_of_page = ['https://leplants.ru/choose-plant/?utm_source=feature&utm_medium=choose&utm_campaign=share&lfilter=type%3A7&sort=-viewer']
 for page in range(2, 63):
@@ -9,16 +10,25 @@ for page in range(2, 63):
 
 def get_data(html):
     list_of_all_links = []
+    counter = 0
     driver = webdriver.Chrome()
     for url in list_of_page:
+        counter += 1
+        if counter % 10 == 0:
+            counter = 0
+            time.sleep(30)
+            driver.quit()
+            driver = webdriver.Chrome()
         driver.get(url)
-
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        for link in soup.find_all('a', class_='title'):
+            list_of_all_links.append('https://leplants.ru' + link.get('href'))
     driver.quit()
-    for link in soup.find_all('a', class_='title'):
-        list_of_all_links.append('https://leplants.ru' + link.get('href'))
     print(list_of_all_links)
 
+    js = json.dumps(list_of_all_links)
+    with open("data.json", "a") as file:
+        file.write(js)
 
 # def get_description(html):
 #     driver = webdriver.Chrome()
