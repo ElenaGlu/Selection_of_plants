@@ -1,34 +1,35 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
 import json
-import time
-
-list_of_page = ['https://leplants.ru/choose-plant/?utm_source=feature&utm_medium=choose&utm_campaign=share&lfilter=type%3A7&sort=-viewer']
-for page in range(2, 63):
-    list_of_page.append(f'https://leplants.ru/choose-plant/?utm_source=feature&utm_medium=choose&utm_campaign=share&lfilter=type%3A7&page={page}sort=-viewers')
 
 
-def get_data(html):
-    list_of_all_links = []
-    counter = 0
+def get_links_pagination():
+    list_links_pagination = [
+        'https://leplants.ru/choose-plant/?utm_source=feature&utm_medium=choose&utm_campaign=share&lfilter=type%3A7'
+        '&sort=-viewer']
+    for page in range(2, 63):
+        list_links_pagination.append(
+            f'https://leplants.ru/choose-plant/?utm_source=feature&utm_medium=choose&utm_campaign=share&lfilter=type'
+            f'%3A7&page={page}sort=-viewers')
+    return list_links_pagination
+
+
+def get_links_to_all_items(list_links_pagination=None):
+    list_links_to_all_items = []
     driver = webdriver.Chrome()
-    for url in list_of_page:
-        counter += 1
-        if counter % 10 == 0:
-            counter = 0
-            time.sleep(30)
-            driver.quit()
-            driver = webdriver.Chrome()
+    driver.set_window_size(1200, 600)
+    for url in list_links_pagination:
         driver.get(url)
         soup = BeautifulSoup(driver.page_source, 'html.parser')
         for link in soup.find_all('a', class_='title'):
-            list_of_all_links.append('https://leplants.ru' + link.get('href'))
+            list_links_to_all_items.append('https://leplants.ru' + link.get('href'))
     driver.quit()
-    print(list_of_all_links)
 
-    js = json.dumps(list_of_all_links)
+    js = json.dumps(list_links_to_all_items)
     with open("data.json", "a") as file:
         file.write(js)
+
+
 
 def get_description(html):
     driver = webdriver.Chrome()
@@ -58,7 +59,8 @@ def get_description(html):
 
 
 def main():
-    get_data('html')
+    # links = get_links_pagination()
+    # get_links_to_all_items(links)
 
 
 if __name__ == '__main__':
