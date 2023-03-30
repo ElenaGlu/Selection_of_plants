@@ -30,35 +30,44 @@ def get_links_to_all_items(list_links_pagination=None):
         file.write(js)
 
 
-
-def get_description(html):
+def get_description_items():
+    list_basic_info_plants = []
+    counter = 0
     driver = webdriver.Chrome()
-    url = 'https://leplants.ru/cupressus/'
-    driver.get(url)
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
-    driver.quit()
+    with open('data.json', 'r') as read_json:
+        json_urls = json.load(read_json)
+        for link in json_urls:
+            driver.get(link)
+            soup = BeautifulSoup(driver.page_source, 'html.parser')
 
-    main_data_plants = []
-    description_table = soup.find('div', class_='jn1ow0-0 bqYbNV')
-    trs = description_table.find_all('tr')
-    for tr in trs:
-        tds = tr.find_all('td')
-        main_data_plants.append(tds[0].text)
-    main_data_plants.extend([None for _ in range(11 - len(main_data_plants))])
+            table_data_plants = []
+            description_table = soup.find('div', class_='jn1ow0-0 bqYbNV')
+            trs = description_table.find_all('tr')
+            for tr in trs:
+                tds = tr.find_all('td')
+                table_data_plants.append(tds[0].text)
+            table_data_plants.extend([None for _ in range(11 - len(table_data_plants))])
 
-    all_data_plants = {'name_of_plant': soup.find('h1', class_='hidden-xs').text,
-                       'pic_of_plant': soup.find('div', class_='item active').find('img').attrs['src'],
-                       'homeland': main_data_plants[0], 'soil': main_data_plants[1], 'size': main_data_plants[2],
-                       'flowering_time': main_data_plants[3], 'leaf_color': main_data_plants[4],
-                       'light_level': main_data_plants[5], 'irrigation_level': main_data_plants[6],
-                       'level_of_care': main_data_plants[7], 'humidity': main_data_plants[8],
-                       'feeding': main_data_plants[9], 'temperature': main_data_plants[10],
-                       'content_or_description': soup.find('div', class_='sc-4e9jew-13 cmbLRJ').text
-                       }
-    print(all_data_plants)
+            basic_info_plants = {'name_of_plant': soup.find('h1', class_='hidden-xs').text,
+                                 'pic_of_plant': soup.find('div', class_='item active').find('img').attrs['src'],
+                                 'homeland': table_data_plants[0], 'soil': table_data_plants[1],
+                                 'size': table_data_plants[2],
+                                 'flowering_time': table_data_plants[3], 'leaf_color': table_data_plants[4],
+                                 'light_level': table_data_plants[5], 'irrigation_level': table_data_plants[6],
+                                 'level_of_care': table_data_plants[7], 'humidity': table_data_plants[8],
+                                 'feeding': table_data_plants[9], 'temperature': table_data_plants[10],
+                                 'content_or_description': soup.find('div', class_='sc-4e9jew-13 cmbLRJ').text
+                                 }
+            list_basic_info_plants.append(basic_info_plants)
+            counter += 1
+            if counter == 5:
+                driver.quit()
+                break
+        print(json.dumps(list_basic_info_plants, indent=4, ensure_ascii=False))
 
 
 def main():
+    get_description_items()
     # links = get_links_pagination()
     # get_links_to_all_items(links)
 
