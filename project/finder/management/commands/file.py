@@ -39,15 +39,24 @@ def get_description_items():
         for link in json_urls:
             driver.get(link)
             soup = BeautifulSoup(driver.page_source, 'html.parser')
-
+            list_add = []
             table_data_plants = []
+
             description_table = soup.find('div', class_='jn1ow0-0 bqYbNV')
             trs = description_table.find_all('tr')
             for tr in trs:
                 tds = tr.find_all('td')
-                table_data_plants.append(tds[0].text)
+                for tds_item in tds:
+                    uls = tds_item.find_all('ul', class_='jn1ow0-3 jkDIse')
+                    for ul in uls:
+                        lis = ul.find('li')
+                        list_add.append(lis.text)
+                if len(list_add) > 0:
+                    table_data_plants.append(list_add)
+                    list_add = []
+                else:
+                    table_data_plants.append(tds[0].text)
             table_data_plants.extend([None for _ in range(11 - len(table_data_plants))])
-
             basic_info_plants = {'name_of_plant': soup.find('h1', class_='hidden-xs').text,
                                  'pic_of_plant': soup.find('div', class_='item active').find('img').attrs['src'],
                                  'homeland': table_data_plants[0], 'soil': table_data_plants[1],
@@ -56,11 +65,11 @@ def get_description_items():
                                  'light_level': table_data_plants[5], 'irrigation_level': table_data_plants[6],
                                  'level_of_care': table_data_plants[7], 'humidity': table_data_plants[8],
                                  'feeding': table_data_plants[9], 'temperature': table_data_plants[10],
-                                 'content_or_description': soup.find('div', class_='sc-4e9jew-13 cmbLRJ').text
+                                 'content_or_description': str(soup.find('div', class_='sc-4e9jew-13 cmbLRJ'))
                                  }
             list_basic_info_plants.append(basic_info_plants)
             counter += 1
-            if counter == 5:
+            if counter == 2:
                 driver.quit()
                 break
         print(json.dumps(list_basic_info_plants, indent=4, ensure_ascii=False))
