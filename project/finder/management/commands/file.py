@@ -1,7 +1,9 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 import json
-
+from finder import models
+from django.core.management.base import BaseCommand
 
 def get_links_pagination():
     list_links_pagination = [
@@ -33,7 +35,8 @@ def get_links_to_all_items(list_links_pagination=None):
 def get_description_items():
     list_basic_info_plants = []
     counter = 0
-    driver = webdriver.Chrome()
+    s = Service('/home/elena/PycharmProjects/chromedriver.exe')
+    driver = webdriver.Chrome(service=s)
     with open('data.json', 'r') as read_json:
         json_urls = json.load(read_json)
         for link in json_urls:
@@ -57,10 +60,19 @@ def get_description_items():
                 else:
                     table_data_plants.append(tds[0].text)
             table_data_plants.extend([None for _ in range(11 - len(table_data_plants))])
+
+            size = table_data_plants[2].split()
+            if len(size) > 2:
+                min_height = size[1]
+                max_height = size[3]
+            else:
+                min_height = 0
+                max_height = size[1]
+
             basic_info_plants = {'name_of_plant': soup.find('h1', class_='hidden-xs').text,
                                  'pic_of_plant': soup.find('div', class_='item active').find('img').attrs['src'],
                                  'homeland': table_data_plants[0], 'soil': table_data_plants[1],
-                                 'size': table_data_plants[2],
+                                 'min_height': min_height, 'max_height': max_height,
                                  'flowering_time': table_data_plants[3], 'leaf_color': table_data_plants[4],
                                  'light_level': table_data_plants[5], 'irrigation_level': table_data_plants[6],
                                  'level_of_care': table_data_plants[7], 'humidity': table_data_plants[8],
@@ -72,7 +84,13 @@ def get_description_items():
             if counter == 2:
                 driver.quit()
                 break
+
         print(json.dumps(list_basic_info_plants, indent=4, ensure_ascii=False))
+
+
+def modelalal():
+    v = models.HousePlants.FEEDING_CHOICES
+    print(dict(v))
 
 
 def main():
@@ -81,5 +99,8 @@ def main():
     # get_links_to_all_items(links)
 
 
-if __name__ == '__main__':
-    main()
+class Command(BaseCommand):
+    def handle(self, *args, **options):
+        modelalal()
+    #   main()
+

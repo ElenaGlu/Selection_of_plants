@@ -4,7 +4,7 @@ from django.db import models
 class HousePlants(models.Model):
     name_of_plant = models.CharField(max_length=50)
 
-    homeland = models.CharField(max_length=20, default='')
+    homeland = models.CharField(max_length=100, default='')
 
     soil = models.CharField(max_length=100)
 
