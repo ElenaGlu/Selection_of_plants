@@ -1,9 +1,12 @@
+import os
+
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 import json
 from finder import models
 from django.core.management.base import BaseCommand
+
 
 def get_links_pagination():
     list_links_pagination = [
@@ -35,9 +38,10 @@ def get_links_to_all_items(list_links_pagination=None):
 def get_description_items():
     list_basic_info_plants = []
     counter = 0
-    s = Service('/home/elena/PycharmProjects/chromedriver.exe')
+    s = Service('/home/elena/pythonProject/chromedriver.exe')
     driver = webdriver.Chrome(service=s)
-    with open('data.json', 'r') as read_json:
+    print(os.getcwd())
+    with open('finder/management/commands/data.json', 'r') as read_json:
         json_urls = json.load(read_json)
         for link in json_urls:
             driver.get(link)
@@ -85,12 +89,14 @@ def get_description_items():
                 driver.quit()
                 break
 
-        print(json.dumps(list_basic_info_plants, indent=4, ensure_ascii=False))
+        return list_basic_info_plants
 
 
-def modelalal():
-    v = models.HousePlants.FEEDING_CHOICES
-    print(dict(v))
+def create_plant_instances(list_basic_info_plants):
+    list_plant_instances = []
+    for item in list_basic_info_plants:
+        list_plant_instances.append(models.HousePlants(**item))
+    models.HousePlants.objects.bulk_create(list_plant_instances)
 
 
 def main():
@@ -101,6 +107,7 @@ def main():
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        modelalal()
-    #   main()
+        # main()
+        create_plant_instances(get_description_items())
+
 
