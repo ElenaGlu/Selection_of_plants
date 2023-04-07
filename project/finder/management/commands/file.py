@@ -1,5 +1,4 @@
 import os
-
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -46,6 +45,7 @@ def get_description_items():
         for link in json_urls:
             driver.get(link)
             soup = BeautifulSoup(driver.page_source, 'html.parser')
+
             list_add = []
             table_data_plants = []
 
