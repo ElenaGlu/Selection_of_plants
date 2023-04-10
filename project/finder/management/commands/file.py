@@ -49,6 +49,9 @@ def get_description_items():
             list_add = []
             table_data_plants = []
 
+            list_homeland = []
+            list_leaf_color = []
+
             description_table = soup.find('div', class_='jn1ow0-0 bqYbNV')
             trs = description_table.find_all('tr')
             for tr in trs:
@@ -63,10 +66,17 @@ def get_description_items():
                     list_add = []
                 else:
                     table_data_plants.append(tds[0].text)
+
             table_data_plants.extend([None for _ in range(11 - len(table_data_plants))])
 
+            temp_dict = {0: list_homeland, 4: list_leaf_color}
+            for key, value in temp_dict.items():
+                if isinstance(table_data_plants[key], str):
+                    value.append(table_data_plants[key])
+                    table_data_plants[key] = value
+
             size = table_data_plants[2].split()
-            if len(size) > 2:
+            if len(size) > 3:
                 min_height = size[1]
                 max_height = size[3]
             else:
@@ -95,12 +105,12 @@ def create_plant_instances(list_basic_info_plants):
 
 
 def main():
-    # get_description_items()
-    # links = get_links_pagination()
-    # get_links_to_all_items(links)
+    get_description_items()
+# links = get_links_pagination()
+# get_links_to_all_items(links)
 
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        # main()
-        # create_plant_instances(get_description_items())
+        main()
+        create_plant_instances(get_description_items())
