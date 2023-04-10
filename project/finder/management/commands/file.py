@@ -84,11 +84,6 @@ def get_description_items():
                                  'content_or_description': str(soup.find('div', class_='sc-4e9jew-13 cmbLRJ'))
                                  }
             list_basic_info_plants.append(basic_info_plants)
-            counter += 1
-            if counter == 2:
-                driver.quit()
-                break
-
         return list_basic_info_plants
 
 
@@ -100,7 +95,7 @@ def create_plant_instances(list_basic_info_plants):
 
 
 def main():
-    get_description_items()
+    # get_description_items()
     # links = get_links_pagination()
     # get_links_to_all_items(links)
 
@@ -108,6 +103,4 @@ def main():
 class Command(BaseCommand):
     def handle(self, *args, **options):
         # main()
-        create_plant_instances(get_description_items())
-
-
+        # create_plant_instances(get_description_items())
