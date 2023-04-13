@@ -35,7 +35,6 @@ def get_links_to_all_items(list_links_pagination=None):
 
 
 def get_description_items():
-
     s = Service('/home/elena/pythonProject/chromedriver.exe')
     driver = webdriver.Chrome(service=s)
     with open('finder/management/commands/data.json', 'r') as read_json:
@@ -46,10 +45,7 @@ def get_description_items():
 
             list_with_li = []
             initial_dict = {}
-
-
-            list_basic_info_plants = []
-
+            list_dict_plant_info = []
 
             table_about_plant = soup.find('div', class_='jn1ow0-0 bqYbNV')
             lines_with_tr = table_about_plant.find_all('tr')
@@ -68,49 +64,52 @@ def get_description_items():
                 else:
                     initial_dict[line_with_th] = line_with_td[0].text
 
+            temp_list = []
+            for key in ['Родина', 'Возможные расцветки']:
+                if isinstance(initial_dict.get(key, None), str):
+                    temp_list.append(initial_dict[key])
+                    initial_dict[key] = temp_list
+                    temp_list = []
 
-            for key in ['Родина','Возможные расцветки']:
-                if isinstance(initial_dict[key], str):
-                    initial_dict[key] = list(initial_dict[key])
+            size = initial_dict.get('Размер', None)
+            if size:
+                size = initial_dict.get('Размер', None).split()
+                if len(size) > 3:
+                    initial_dict['min_height'] = size[1]
+                    initial_dict['max_height'] = size[3]
+                else:
+                    initial_dict['min_height'] = 0
+                    initial_dict['max_height'] = size[1]
+
+            dict_plant_info = {'name_of_plant': soup.find('h1', class_='hidden-xs').text,
+                               'pic_of_plant': soup.find('div', class_='item active').find('img').attrs['src'],
+                               'min_height': initial_dict.get('min_height', None),
+                               'max_height': initial_dict.get('max_height', None),
+                               'homeland': initial_dict.get('Родина', None), 'soil': initial_dict.get('Почва', None),
+                               'flowering_time': initial_dict.get('Время цветения', None),
+                               'leaf_color': initial_dict.get('Возможные расцветки', None),
+                               'light_level': initial_dict.get('Освещенность', None),
+                               'irrigation_level': initial_dict.get('Полив', None),
+                               'level_of_care': initial_dict.get('Сложность ухода', None),
+                               'humidity': initial_dict.get('Влажность воздуха', None),
+                               'feeding': initial_dict.get('Частота удобрения', None),
+                               'temperature': initial_dict.get('Температура содержания', None),
+                               'content_or_description': str(soup.find('div', class_='sc-4e9jew-13 cmbLRJ'))
+                               }
+            list_dict_plant_info.append(dict_plant_info)
+        return list_dict_plant_info
 
 
-
-            size = initial_dict[2].split()
-            if len(size) > 3:
-                min_height = size[1]
-                max_height = size[3]
-            else:
-                min_height = 0
-                max_height = size[1]
-
-            basic_info_plants = {'name_of_plant': soup.find('h1', class_='hidden-xs').text,
-                                 'pic_of_plant': soup.find('div', class_='item active').find('img').attrs['src'],
-                                 'homeland': initial_dict[0], 'soil': initial_dict[1],
-                                 'min_height': min_height, 'max_height': max_height,
-                                 'flowering_time': initial_dict[3], 'leaf_color': initial_dict[4],
-                                 'light_level': initial_dict[5], 'irrigation_level': initial_dict[6],
-                                 'level_of_care': initial_dict[7], 'humidity': initial_dict[8],
-                                 'feeding': initial_dict[9], 'temperature': initial_dict[10],
-                                 'content_or_description': str(soup.find('div', class_='sc-4e9jew-13 cmbLRJ'))
-                                 }
-            list_basic_info_plants.append(basic_info_plants)
-        return list_basic_info_plants
-
-
-def create_plant_instances(list_basic_info_plants):
+def create_plant_instances(list_dict_plant_info):
     list_plant_instances = []
-    for item in list_basic_info_plants:
+    for item in list_dict_plant_info:
         list_plant_instances.append(models.HousePlants(**item))
     models.HousePlants.objects.bulk_create(list_plant_instances)
 
 
-def main():
-    get_description_items()
-# links = get_links_pagination()
-# get_links_to_all_items(links)
-
-
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        main()
-        create_plant_instances(get_description_items())
+        s = get_description_items()
+        create_plant_instances(s)
+# links = get_links_pagination()
+# get_links_to_all_items(links)
