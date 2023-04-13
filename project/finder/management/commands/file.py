@@ -35,47 +35,47 @@ def get_links_to_all_items(list_links_pagination=None):
 
 
 def get_description_items():
-    list_basic_info_plants = []
-    counter = 0
+
     s = Service('/home/elena/pythonProject/chromedriver.exe')
     driver = webdriver.Chrome(service=s)
-    print(os.getcwd())
     with open('finder/management/commands/data.json', 'r') as read_json:
         json_urls = json.load(read_json)
         for link in json_urls:
             driver.get(link)
             soup = BeautifulSoup(driver.page_source, 'html.parser')
 
-            list_add = []
-            table_data_plants = []
+            list_with_li = []
+            initial_dict = {}
 
-            list_homeland = []
-            list_leaf_color = []
 
-            description_table = soup.find('div', class_='jn1ow0-0 bqYbNV')
-            trs = description_table.find_all('tr')
-            for tr in trs:
-                tds = tr.find_all('td')
-                for tds_item in tds:
-                    uls = tds_item.find_all('ul', class_='jn1ow0-3 jkDIse')
-                    for ul in uls:
-                        lis = ul.find('li')
-                        list_add.append(lis.text)
-                if len(list_add) > 0:
-                    table_data_plants.append(list_add)
-                    list_add = []
+            list_basic_info_plants = []
+
+
+            table_about_plant = soup.find('div', class_='jn1ow0-0 bqYbNV')
+            lines_with_tr = table_about_plant.find_all('tr')
+            for tr in lines_with_tr:
+                line_with_th = tr.find('th').text
+                initial_dict[line_with_th] = None
+                line_with_td = tr.find_all('td')
+                for td_item in line_with_td:
+                    line_with_ul = td_item.find_all('ul', class_='jn1ow0-3 jkDIse')
+                    for ul_item in line_with_ul:
+                        line_with_li = ul_item.find('li')
+                        list_with_li.append(line_with_li.text)
+                if len(list_with_li) > 0:
+                    initial_dict[line_with_th] = list_with_li
+                    list_with_li = []
                 else:
-                    table_data_plants.append(tds[0].text)
+                    initial_dict[line_with_th] = line_with_td[0].text
 
-            table_data_plants.extend([None for _ in range(11 - len(table_data_plants))])
 
-            temp_dict = {0: list_homeland, 4: list_leaf_color}
-            for key, value in temp_dict.items():
-                if isinstance(table_data_plants[key], str):
-                    value.append(table_data_plants[key])
-                    table_data_plants[key] = value
+            for key in ['Родина','Возможные расцветки']:
+                if isinstance(initial_dict[key], str):
+                    initial_dict[key] = list(initial_dict[key])
 
-            size = table_data_plants[2].split()
+
+
+            size = initial_dict[2].split()
             if len(size) > 3:
                 min_height = size[1]
                 max_height = size[3]
@@ -85,12 +85,12 @@ def get_description_items():
 
             basic_info_plants = {'name_of_plant': soup.find('h1', class_='hidden-xs').text,
                                  'pic_of_plant': soup.find('div', class_='item active').find('img').attrs['src'],
-                                 'homeland': table_data_plants[0], 'soil': table_data_plants[1],
+                                 'homeland': initial_dict[0], 'soil': initial_dict[1],
                                  'min_height': min_height, 'max_height': max_height,
-                                 'flowering_time': table_data_plants[3], 'leaf_color': table_data_plants[4],
-                                 'light_level': table_data_plants[5], 'irrigation_level': table_data_plants[6],
-                                 'level_of_care': table_data_plants[7], 'humidity': table_data_plants[8],
-                                 'feeding': table_data_plants[9], 'temperature': table_data_plants[10],
+                                 'flowering_time': initial_dict[3], 'leaf_color': initial_dict[4],
+                                 'light_level': initial_dict[5], 'irrigation_level': initial_dict[6],
+                                 'level_of_care': initial_dict[7], 'humidity': initial_dict[8],
+                                 'feeding': initial_dict[9], 'temperature': initial_dict[10],
                                  'content_or_description': str(soup.find('div', class_='sc-4e9jew-13 cmbLRJ'))
                                  }
             list_basic_info_plants.append(basic_info_plants)
