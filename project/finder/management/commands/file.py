@@ -35,6 +35,9 @@ def get_links_to_all_items(list_links_pagination=None):
 
 
 def get_description_items():
+
+    list_dict_plant_info = []
+
     s = Service('/home/elena/pythonProject/chromedriver.exe')
     driver = webdriver.Chrome(service=s)
     with open('finder/management/commands/data.json', 'r') as read_json:
@@ -45,7 +48,6 @@ def get_description_items():
 
             list_with_li = []
             initial_dict = {}
-            list_dict_plant_info = []
 
             table_about_plant = soup.find('div', class_='jn1ow0-0 bqYbNV')
             lines_with_tr = table_about_plant.find_all('tr')
@@ -85,7 +87,8 @@ def get_description_items():
                                'pic_of_plant': soup.find('div', class_='item active').find('img').attrs['src'],
                                'min_height': initial_dict.get('min_height', None),
                                'max_height': initial_dict.get('max_height', None),
-                               'homeland': initial_dict.get('Родина', None), 'soil': initial_dict.get('Почва', None),
+                               'homeland': initial_dict.get('Родина', None),
+                               'soil': initial_dict.get('Почва', None),
                                'flowering_time': initial_dict.get('Время цветения', None),
                                'leaf_color': initial_dict.get('Возможные расцветки', None),
                                'light_level': initial_dict.get('Освещенность', None),
@@ -109,7 +112,8 @@ def create_plant_instances(list_dict_plant_info):
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        s = get_description_items()
-        create_plant_instances(s)
-# links = get_links_pagination()
-# get_links_to_all_items(links)
+        # links = get_links_pagination()
+        # get_links_to_all_items(links)
+        # s = get_description_items()
+        # create_plant_instances(s)
+
