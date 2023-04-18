@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from finder import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('select_plant/', views.select_plant, name='select_plant')
 ]
