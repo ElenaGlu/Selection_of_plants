@@ -30,7 +30,7 @@ def get_links_to_all_items(list_links_pagination=None):
     driver.quit()
 
     js = json.dumps(list_links_to_all_items)
-    with open("data.json", "a") as file:
+    with open("links.json", "a") as file:
         file.write(js)
 
 
@@ -40,7 +40,7 @@ def get_description_items():
 
     s = Service('/home/elena/pythonProject/chromedriver.exe')
     driver = webdriver.Chrome(service=s)
-    with open('finder/management/commands/data.json', 'r') as read_json:
+    with open('finder/management/commands/links.json', 'r') as read_json:
         json_urls = json.load(read_json)
         for link in json_urls:
             driver.get(link)
