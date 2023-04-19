@@ -1,0 +1,27 @@
+html{
+background: #b6f9ff;
+
+}
+.table {
+    display: flex;
+    flex-flow: row wrap;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+
+}
+
+.pic_plant {
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+
+}
+img {
+    width: 30%;
+    height: 30%;
+    background-color: grey;
+}
+p {
+    display: block;
+    font-size: 15px;
+}

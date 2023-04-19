@@ -1,8 +1,8 @@
-from django.shortcuts import render
-from django.http import Http404
+from django.shortcuts import get_object_or_404, render
 from .models import HousePlants
 
 
 def select_plant(request):
-    plants = HousePlants.name_of_plant
-    return render(request, 'select_plant.html', {'plants': plants})
+    plants = HousePlants.objects.all()
+
+    return render(request, 'finder/select_plant.html', {'plants': plants})

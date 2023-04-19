@@ -19,5 +19,5 @@ from finder import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('select_plant/', views.select_plant, name='select_plant')
+    path('', views.select_plant, name='select_plant')
 ]
