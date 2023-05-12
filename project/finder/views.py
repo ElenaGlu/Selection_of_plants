@@ -4,5 +4,4 @@ from .models import HousePlants
 
 def select_plant(request):
     plants = HousePlants.objects.all()
-
     return render(request, 'finder/select_plant.html', {'plants': plants})

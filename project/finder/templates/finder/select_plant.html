@@ -1,3 +1,6 @@
+
+
+
 {% extends "finder/base.html" %}
 {% block title %}Viva Flower Finder{% endblock %}
 {% block content %}
@@ -7,8 +10,10 @@
     {% for name in plants %}
     {% cycle '<tr>' '' '' '' %}
       <td> <div class="pic_plant">
-          <img src="{{name.pic_of_plant}}" width="200px" height="200px">
-          <p>{{name.name_of_plant}}</p>
+
+          <img src="{{'static/img/'}}{{name.name_of_plant}}{{'.jpg'}}" width="150px" height="150px">
+
+          <p>{{name.short_name}}</p>
           </div>
       </td>
     {% cycle '' '' '' '</tr>' %}

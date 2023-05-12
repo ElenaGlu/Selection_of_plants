@@ -1,5 +1,4 @@
 import os
-
 import psycopg2
 from finder import models
 from bs4 import BeautifulSoup
@@ -112,6 +111,14 @@ def create_plant_instances(list_dict_plant_info):
         list_plant_instances.append(models.HousePlants(**item))
     models.HousePlants.objects.bulk_create(list_plant_instances)
 
+def create_short_name():
+    list_short_name = []
+    for item in models.HousePlants.objects.all():
+        name = item.name_of_plant
+        item.short_name = name.split('(')[0]
+        list_short_name.append(item)
+    models.HousePlants.objects.bulk_update(list_short_name, ['short_name'])
+
 
 def download_main_img():
     all_plants = models.HousePlants.objects.all()
@@ -124,6 +131,7 @@ def download_main_img():
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
+        # create_short_name()
         # download_main_img()
         # links = get_links_pagination()
         # get_links_to_all_items(links)

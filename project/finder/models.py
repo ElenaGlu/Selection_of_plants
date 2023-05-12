@@ -17,4 +17,4 @@ class HousePlants(models.Model):
     temperature = models.CharField(max_length=500, null=True)
     content_or_description = models.TextField(null=True)
     pic_of_plant = models.CharField(max_length=500, null=True)
-
+    short_name = models.CharField(max_length=500, null=True)
