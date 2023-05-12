@@ -1,9 +1,12 @@
 import os
+
+import psycopg2
+from finder import models
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 import json
-from finder import models
+import urllib.request
 from django.core.management.base import BaseCommand
 
 
@@ -110,8 +113,18 @@ def create_plant_instances(list_dict_plant_info):
     models.HousePlants.objects.bulk_create(list_plant_instances)
 
 
+def download_main_img():
+    all_plants = models.HousePlants.objects.all()
+    for plant in all_plants:
+        name_img = plant.name_of_plant
+        url_img = plant.pic_of_plant
+        full_path = '/home/elena/pythonProject/site/project/finder/static/main img/' + name_img + '.jpg'
+        urllib.request.urlretrieve(url_img, full_path)
+
+
 class Command(BaseCommand):
     def handle(self, *args, **options):
+        # download_main_img()
         # links = get_links_pagination()
         # get_links_to_all_items(links)
         # s = get_description_items()

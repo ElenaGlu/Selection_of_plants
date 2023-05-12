@@ -3,7 +3,6 @@ from django.db import models
 
 class HousePlants(models.Model):
     name_of_plant = models.CharField(max_length=500)
-    pic_of_plant = models.ImageField(null=True)
     homeland = models.CharField(max_length=500, null=True)
     soil = models.CharField(max_length=500, null=True)
     min_height = models.PositiveIntegerField(null=True)
@@ -17,4 +16,5 @@ class HousePlants(models.Model):
     feeding = models.CharField(max_length=500, null=True)
     temperature = models.CharField(max_length=500, null=True)
     content_or_description = models.TextField(null=True)
+    pic_of_plant = models.CharField(max_length=500, null=True)
 
