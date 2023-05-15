@@ -1,0 +1,100 @@
+body {
+    background-color: #f3f3f3;
+}
+
+.header {
+    padding: 30px; /* some padding */
+    text-align: center; /* center the text */
+    color: #834e46; /* white text color */
+    border-style: double;
+    border-width: 5px;
+    border-color: #834e46;
+
+}
+
+/* Increase the font size of the <h1> element */
+.header h1 {
+    font-size: 50px;
+    font-family: 'Lobster', cursive;
+    color: #898dde;
+}
+
+/* Column container */
+.row {
+    display: flex;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+
+.side {
+    flex: 30%; /* Set the width of the sidebar */
+    padding: 20px; /* Some padding */
+}
+
+/* Main column */
+.main {
+    flex: 70%; /* Set the width of the main content */
+    padding: 20px; /* Some padding */
+    margin-left: 5%;
+}
+.footer {
+    padding: 20px; /* Some padding */
+    text-align: center; /* Center text*/
+    border-style: double;
+    border-width: 5px;
+    border-color: #834e46;
+}
+
+.pic_plant p {
+     font-size: 12px;
+     text-align: center;
+     font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+}
+
+.pic_plant {
+    width: 150px;
+    height: 150px;
+}
+
+.pic_plant img {
+    padding-left: 25px;
+}
+
+table {
+    border-style: double;
+    border-width: 5px;
+    border-color: #834e46;
+    padding: 30px;
+    color: #48232d;
+
+}
+
+section p {
+    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    font-size: 16px;
+    color: #48232d;
+}
+
+section {
+    width: 50%;
+    height: 50%;
+    padding-left: 10%;
+}
+#number {
+  width: 10em;
+}
+
+#white{
+    background-color: white;
+}
+#blue {    background-color: blue;}
+#yellow{    background-color: yellow;}
+#green{    background-color: green;}
+#red{    background-color: red;}
+#orange{    background-color: orange;}
+#color{    background-color: white;}
+#pink{    background-color: pink;}
+#dark-blue{    background-color: darkblue;}
+#perl{    background-color: purple;}
+#black{    background-color: black;}
