@@ -7,102 +7,18 @@
 <div class="row">
   <div class="side">
       <section>
-          <table>
-          <div class="leaf_color">
-              <tr>
-               <th rowspan="4"> <p>{% block p %}Цвета листьев</p></th>
-                  <th id="white"> </th>
-                  <th id="blue"></th>
-                  <th id="yellow"></th>
-
-                </tr>
-              <tr>
-              		<th id="red"></th>
-		            <th id="orange"></th>
-		            <th id="color"></th>
-
-              </tr>
-              <tr>
-              		<th id="dark-blue"></th>
-		            <th id="perl"></th>
-		            <th id="black"></th>
-              </tr>
-                    <tr>
-                        <th id="green"></th>
-                        <th id="pink"></th>
-              </tr>
-          </div>
-          <div class="min_height">
-               <tr>
-               <th><p>Минимальная высота (от)</p></th>
-                   <th colspan="3"> <input type="number" id="number" ></th>
-                   <th></th>
-                   <th></th>
-                   <th></th>
-              </tr>
-          </div>
-          <div class="max_height">
-              <tr>
-               <th><p>Максимальная высота (до)</p></th>
-                   <th colspan="3"> <input type="number" id="number" ></th>
-                   <th></th>
-                   <th></th>
-                   <th></th>
-              </tr>
-          </div>
-          <div class="level_of_care">
-              <tr>
-                  <th><p>Сложность ухода</p></th>
-                <th><input type="checkbox" id="raz"/><label for="raz">1</label></th>
-                <th><input type="checkbox" id="raz"/><label for="raz">2</label></th>
-                <th><input type="checkbox" id="raz"/><label for="raz">3</label></th>
-              </tr>
-          </div>
-          <div class="light_level">
-               <tr>
-               <th><p>Освещенность</p>
-                <th><input type="checkbox" id="raz"/><label for="raz">1</label></th>
-                <th><input type="checkbox" id="raz"/><label for="raz">2</label></th>
-                <th><input type="checkbox" id="raz"/><label for="raz">3</label></th>
-              </tr>
-          </div>
-          <div class="irrigation_level">
-               <tr>
-               <th><p>Полив</p>
-                <th><input type="checkbox" id="raz"/><label for="raz">1</label></th>
-                <th><input type="checkbox" id="raz"/><label for="raz">2</label></th>
-                <th><input type="checkbox" id="raz"/><label for="raz">3</label></th>
-              </tr>
-          </div>
-          <div class="temperature">
-               <tr>
-               <th><p>Температура содержания </p>
-                <th><input type="checkbox" id="raz"/><label for="raz">1</label></th>
-                <th><input type="checkbox" id="raz"/><label for="raz">2</label></th>
-                <th><input type="checkbox" id="raz"/><label for="raz">3</label></th>
-              </tr>
-          </div>
-          <div class="humidity">
-               <tr>
-               <th><p>Влажность воздуха</p>
-                <th><input type="checkbox" id="raz"/><label for="raz">1</label></th>
-                <th><input type="checkbox" id="raz"/><label for="raz">2</label></th>
-                <th><input type="checkbox" id="raz"/><label for="raz">3</label></th>
-              </tr>
-          </div>
-          <div class="feeding">
-               <tr>
-               <th><p>Частота удобрения{% endblock %}</p>
-                <th><input type="checkbox" id="raz"/><label for="raz">1</label></th>
-                <th><input type="checkbox" id="raz"/><label for="raz">2</label></th>
-                <th><input type="checkbox" id="raz"/><label for="raz">3</label></th>
-              </tr>
-          </div>
-               </table>
-
+          <label>level_of_care</label>
+        <form action="/level_of_care/" method="post">
+            {% csrf_token %}
+            <label for="box1"><input type="radio" name="level_of_care" value="1" id="box1">1</label>
+            <label for="box2"><input type="radio" name="level_of_care" value="2" id="box2">2</label>
+            <label for="box3"><input type="radio" name="level_of_care" value="3" id="box3">3</label>
+            {{ form.as_p }}
+            <input type="submit" value="OK">
+        </form>
       </section>
-
   </div>
+
   <div class="main">
       <table>
     {% for name in page_obj %}
