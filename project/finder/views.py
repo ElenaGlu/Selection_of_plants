@@ -13,8 +13,8 @@ def select_plant(request):
     if request.method == "POST":
         plants = []
         if form.is_valid():
-            level_of_care = request.POST["level_of_care"]
-            plants = HousePlants.objects.filter(level_of_care=level_of_care)
+            level_of_care = request.POST.getlist("level_of_care")
+            plants = HousePlants.objects.filter(level_of_care__in=level_of_care)
         else:
             CheckBoxForm()
     paginator = Paginator(plants, 30)

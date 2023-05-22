@@ -11,7 +11,7 @@ class CheckBoxForm(forms.Form):
     unique_level_of_care = set(list_level_of_care)
     CHOICES = tuple((item, item) for item in unique_level_of_care if item)
 
-    level_of_care = forms.ChoiceField(label="Сложность ухода", widget=forms.RadioSelect, choices=CHOICES, required=False)
+    level_of_care = forms.MultipleChoiceField(label="Сложность ухода", widget=forms.CheckboxSelectMultiple, choices=CHOICES, required=False)
     # light_level = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
     # irrigation_level = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
     # temperature = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
