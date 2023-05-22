@@ -20,5 +20,4 @@ from finder import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.select_plant, name='select_plant'),
-    path('level_of_care/', views.form_checkbox, name='form_checkbox')
 ]

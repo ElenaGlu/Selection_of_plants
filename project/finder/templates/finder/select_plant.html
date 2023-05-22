@@ -7,12 +7,8 @@
 <div class="row">
   <div class="side">
       <section>
-          <label>level_of_care</label>
-        <form action="/level_of_care/" method="post">
+        <form action="" method="post">
             {% csrf_token %}
-            <label for="box1"><input type="radio" name="level_of_care" value="1" id="box1">1</label>
-            <label for="box2"><input type="radio" name="level_of_care" value="2" id="box2">2</label>
-            <label for="box3"><input type="radio" name="level_of_care" value="3" id="box3">3</label>
             {{ form.as_p }}
             <input type="submit" value="OK">
         </form>
