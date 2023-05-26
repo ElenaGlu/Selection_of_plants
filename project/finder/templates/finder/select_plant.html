@@ -10,7 +10,7 @@
         <form action="" method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value="OK">
+            <input type="Submit" name="submit" value="Поиск"/>
         </form>
       </section>
   </div>
@@ -22,7 +22,7 @@
       <td> <div class="pic_plant">
           <img src="{{'static/img/'}}{{name.name_of_plant}}{{'.jpg'}}" width="100px" height="100px">
 
-          <p>{{name.short_name}}</p>
+          <p>{{name.short_name}}<a href="{% url 'description_plant' %}"></p>
           </div>
       </td>
     {% cycle '' '' '' '' '</tr>' %}
