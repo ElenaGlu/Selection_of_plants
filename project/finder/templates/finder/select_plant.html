@@ -21,8 +21,8 @@
     {% cycle '<tr>' '' '' '' '' %}
       <td> <div class="pic_plant">
           <img src="{{'static/img/'}}{{name.name_of_plant}}{{'.jpg'}}" width="100px" height="100px">
+          <p><a href="{% url 'description_plant' pk=name.pk %}">{{ name.short_name }}</a></p>
 
-          <p>{{name.short_name}}<a href="{% url 'description_plant' %}"></p>
           </div>
       </td>
     {% cycle '' '' '' '' '</tr>' %}

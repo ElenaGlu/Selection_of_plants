@@ -3,31 +3,72 @@
 
 {% block content %}
 <div class="pic">
-           <img src="{{'static/img/'}}{{name.name_of_plant}}{{'.jpg'}}" width="500px" height="500px">
+<img src="{{'../static/img/'}}{{plant.name_of_plant}}{{'.jpg'}}" width="300px" height="300px">
 </div>
 <div class="name">
-     <p>{{name.short_name}}</p>
+        <td><h2>{{ plant.name_of_plant }}</h2></td>
 </div>
-<table>
-    <tr>
-        <td></td>
-        <td></td>
-    </tr>
-        <tr>
-        <td></td>
-        <td></td>
-    </tr>
-        <tr>
-        <td></td>
-        <td></td>
-    </tr>
-        <tr>
-        <td></td>
-        <td></td>
-    </tr>
-</table>
-
 <div class="content">
+<table>
+        <tr>
+        <td>Родина</td>
+        <td>{{ plant.homeland }}</td>
+        </tr>
 
+        <tr>
+        <td>Почва</td>
+        <td>{{ plant.soil }}</td>
+        </tr>
+
+        <tr>
+        <td>Размер</td>
+        <td>{{ plant.min_height }} см - {{ plant.max_height }} см</td>
+        </tr>
+
+        <tr>
+        <td>Время цветения</td>
+        <td>{{ plant.flowering_time }}</td>
+        </tr>
+
+        <tr>
+        <td>Возможные расцветки</td>
+        <td>{{ plant.leaf_color }}</td>
+        </tr>
+
+        <tr>
+        <td>Освещенность</td>
+        <td>{{ plant.light_level }}</td>
+        </tr>
+
+        <tr>
+        <td>Полив</td>
+        <td>{{ plant.irrigation_level }}</td>
+        </tr>
+
+        <tr>
+        <td>Сложность ухода</td>
+        <td>{{ plant.level_of_care }}</td>
+        </tr>
+
+        <tr>
+        <td>Влажность воздуха</td>
+        <td>{{ plant.humidity }}</td>
+        </tr>
+
+        <tr>
+        <td>Частота удобрения</td>
+        <td>{{ plant.feeding }}</td>
+        </tr>
+
+        <tr>
+        <td>Температура содержания</td>
+        <td>{{ plant.temperature }}</td>
+        </tr>
+</table>
+</div>
+
+<div class="description">
+        <h3>Описание</h3></td>
+        {{ plant.content_or_description }}
 </div>
 {% endblock %}

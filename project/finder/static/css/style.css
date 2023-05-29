@@ -98,3 +98,12 @@ section {
 #dark-blue{    background-color: darkblue;}
 #perl{    background-color: purple;}
 #black{    background-color: black;}
+
+
+content {
+margin-left: 30%;
+}
+
+.pic{
+    margin: 20%;
+}

@@ -31,6 +31,8 @@ def select_plant(request):
 
     return render(request, 'finder/select_plant.html', {'form': form, 'page_obj': page_obj})
 
-# def description_plant(request):
-#     description = get_object_or_404(pk=post_id)
+
+def description_plant(request, pk):
+    plant = get_object_or_404(HousePlants, pk=pk)
+    return render(request, 'finder/description_plant.html', {'plant': plant})
 
