@@ -10,7 +10,9 @@
         <form action="" method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="Submit" name="submit" value="Поиск"/>
+            <div class="button">
+                <input type="Submit" name="submit" value="Применить"/>
+            </div>
         </form>
       </section>
   </div>
@@ -19,11 +21,12 @@
       <table>
     {% for name in page_obj %}
     {% cycle '<tr>' '' '' '' '' %}
-      <td> <div class="pic_plant">
-          <img src="{{'static/img/'}}{{name.name_of_plant}}{{'.jpg'}}" width="100px" height="100px">
-          <p><a href="{% url 'description_plant' pk=name.pk %}">{{ name.short_name }}</a></p>
-
+      <td>
+          <div class="pic_name">
+          <div class="pic_plant">
+          <img src="{{'static/img/'}}{{name.name_of_plant}}{{'.jpg'}}" width="100%" height="100%">
           </div>
+              <p><a href="{% url 'description_plant' pk=name.pk %}">{{ name.short_name }}</a></p></div>
       </td>
     {% cycle '' '' '' '' '</tr>' %}
   {% endfor %}

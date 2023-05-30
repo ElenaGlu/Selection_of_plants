@@ -28,13 +28,13 @@ body {
 /* Sidebar/left column */
 
 .side {
-    flex: 30%; /* Set the width of the sidebar */
-    padding: 20px; /* Some padding */
+    flex: 40%; /* Set the width of the sidebar */
+
 }
 
 /* Main column */
 .main {
-    flex: 70%; /* Set the width of the main content */
+    flex: 60%; /* Set the width of the main content */
     padding: 20px; /* Some padding */
     margin-left: 5%;
 }
@@ -46,19 +46,28 @@ body {
     border-color: #834e46;
 }
 
-.pic_plant p {
+.pic_name p {
      font-size: 12px;
      text-align: center;
      font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
 }
 
-.pic_plant {
-    width: 150px;
+.pic_name {
     height: 150px;
+    width: 150px;
+
+}
+
+.pic_plant {
+    height: 100px;
+    width: 100px;
+    padding-left: 25px;
+    padding-right: 25px;
+
 }
 
 .pic_plant img {
-    padding-left: 25px;
+    object-fit: cover;
 }
 
 table {
@@ -72,14 +81,18 @@ table {
 
 section p {
     font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     color: #48232d;
+    text-align: center;
 }
 
 section {
-    width: 50%;
-    height: 50%;
+
     padding-left: 10%;
+}
+.button{
+    padding-left: 35%;
+    padding-top: 25px;
 }
 #number {
   width: 10em;
@@ -100,10 +113,38 @@ section {
 #black{    background-color: black;}
 
 
-content {
-margin-left: 30%;
-}
+
 
 .pic{
-    margin: 20%;
+    padding-left: 20%;
+    padding-top: 80px;
+    height: 350px;
+    width: 350px;
+}
+.pic img{
+    object-fit: cover;
+}
+.one{
+    flex: 40%;
+}
+.two{
+
+    flex: 60%;
+    margin-right: 10%;
+}
+
+.row1{
+    display: flex;
+}
+
+.name {
+    text-align: center;
+    font-size: 15px;
+    color: #48232d;
+}
+
+.description h3 {
+    font-size: 20px;
+    color: #48232d;
+    text-align: center;
 }
