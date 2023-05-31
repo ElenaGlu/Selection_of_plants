@@ -1,61 +1,61 @@
 body {
-    background-color: #f3f3f3;
+    background-color: #ffffff;
 }
 
 .header {
-    padding: 30px; /* some padding */
-    text-align: center; /* center the text */
-    color: #834e46; /* white text color */
-    border-style: double;
-    border-width: 5px;
-    border-color: #834e46;
+    padding-bottom: 30px;
+    text-align: center;
+    font-family: 'Oooh Baby', cursive;
+    color: #834e46;
+    font-size: 20px;
 
 }
-
-/* Increase the font size of the <h1> element */
 .header h1 {
-    font-size: 50px;
-    font-family: 'Lobster', cursive;
-    color: #898dde;
+    font-size: 60px;
+    font-family: 'Oooh Baby', cursive;
+    color: #5bab48;
+    margin-bottom: 10px;
+}
+.header h4 {
+      margin: 0;
 }
 
-/* Column container */
 .row {
     display: flex;
 }
 
-/* Create two unequal columns that sits next to each other */
-/* Sidebar/left column */
-
 .side {
-    flex: 40%; /* Set the width of the sidebar */
-
+    flex: 40%;
+    padding-top: 20px;
 }
 
-/* Main column */
 .main {
-    flex: 60%; /* Set the width of the main content */
-    padding: 20px; /* Some padding */
-    margin-left: 5%;
-}
-.footer {
-    padding: 20px; /* Some padding */
-    text-align: center; /* Center text*/
-    border-style: double;
-    border-width: 5px;
-    border-color: #834e46;
+    flex: 60%;
+    padding: 30px;
+    margin: 30px;
+    border-radius: 60px;
+    border-style: solid;
+    border-color: #89c27f;
 }
 
-.pic_name p {
-     font-size: 12px;
-     text-align: center;
-     font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+.footer {
+    padding: 20px;
+    text-align: center;
+}
+
+table {
+    padding-left: 15px;
 }
 
 .pic_name {
     height: 150px;
     width: 150px;
 
+}
+.pic_name p {
+     font-size: 12px;
+     text-align: center;
+     font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
 }
 
 .pic_plant {
@@ -65,18 +65,8 @@ body {
     padding-right: 25px;
 
 }
-
 .pic_plant img {
     object-fit: cover;
-}
-
-table {
-    border-style: double;
-    border-width: 5px;
-    border-color: #834e46;
-    padding: 30px;
-    color: #48232d;
-
 }
 
 section p {
@@ -87,64 +77,90 @@ section p {
 }
 
 section {
-
     padding-left: 10%;
 }
+
 .button{
     padding-left: 35%;
     padding-top: 25px;
 }
+
 #number {
   width: 10em;
 }
 
-#white{
+#white {
     background-color: white;
 }
-#blue {    background-color: blue;}
-#yellow{    background-color: yellow;}
-#green{    background-color: green;}
-#red{    background-color: red;}
-#orange{    background-color: orange;}
-#color{    background-color: white;}
-#pink{    background-color: pink;}
-#dark-blue{    background-color: darkblue;}
-#perl{    background-color: purple;}
-#black{    background-color: black;}
+#blue {
+    background-color: blue;
+}
+#yellow {
+    background-color: yellow;
+}
+#green {
+    background-color: green;
+}
+#red {
+    background-color: red;
+}
+#orange {
+    background-color: orange;
+}
+#color {
+    background-color: white;
+}
+#pink {
+    background-color: pink;
+}
+#dark-blue {
+    background-color: darkblue;
+}
+#perl {
+    background-color: purple;
+}
+#black {
+    background-color: black;
+}
 
-
-
-
-.pic{
-    padding-left: 20%;
-    padding-top: 80px;
+.pic {
+    padding-left: 80px;
+    padding-bottom: 50px;
     height: 350px;
     width: 350px;
 }
-.pic img{
+.pic img {
     object-fit: cover;
 }
-.one{
-    flex: 40%;
-}
-.two{
 
+.one {
+    flex: 30%;
+}
+.two {
     flex: 60%;
-    margin-right: 10%;
+    padding-top: 60px;
 }
 
 .row1{
     display: flex;
+    border-radius: 60px;
+    border-style: solid;
+    border-color: #89c27f;
 }
 
 .name {
     text-align: center;
     font-size: 15px;
-    color: #48232d;
+    color: #834e46;
 }
 
 .description h3 {
     font-size: 20px;
-    color: #48232d;
+    color: #834e46;
     text-align: center;
+}
+
+a {
+  text-decoration: none !important;
+    color: #48232d;
 }

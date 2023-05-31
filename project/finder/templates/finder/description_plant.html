@@ -4,70 +4,67 @@
 {% block content %}
 <div class="row1">
         <div class="one">
+                <div class="name"><td><h2>{{ plant.name_of_plant }}</h2></td></div>
                 <div class="pic">
                         <img src="{{'../static/img/'}}{{plant.name_of_plant}}{{'.jpg'}}" width="100%" height="100%" ></div>
         </div>
 
         <div class="two">
-                <div class="name">
-                <td><h2>{{ plant.name_of_plant }}</h2></td>
-        </div>
-
                 <table>
-        <tr>
-        <td>Родина:</td>
-        <td>{{ plant.homeland }}</td>
-        </tr>
+                <tr>
+                <td>Родина:</td>
+                <td>{{ plant.homeland }}</td>
+                </tr>
 
-        <tr>
-        <td>Почва:</td>
-        <td>{{ plant.soil }}</td>
-        </tr>
+                <tr>
+                <td>Почва:</td>
+                <td>{{ plant.soil }}</td>
+                </tr>
 
-        <tr>
-        <td>Размер:</td>
-        <td>{{ plant.min_height }} см - {{ plant.max_height }} см</td>
-        </tr>
+                <tr>
+                <td>Размер:</td>
+                <td>{{ plant.min_height }} см - {{ plant.max_height }} см</td>
+                </tr>
 
-        <tr>
-        <td>Время цветения:</td>
-        <td>{{ plant.flowering_time }}</td>
-        </tr>
+                <tr>
+                <td>Время цветения:</td>
+                <td>{{ plant.flowering_time }}</td>
+                </tr>
 
-        <tr>
-        <td>Возможные расцветки:</td>
-        <td>{{ plant.leaf_color }}</td>
-        </tr>
+                <tr>
+                <td>Возможные расцветки:</td>
+                <td>{{ plant.leaf_color }}</td>
+                </tr>
 
-        <tr>
-        <td>Освещенность:</td>
-        <td>{{ plant.light_level }}</td>
-        </tr>
+                <tr>
+                <td>Освещенность:</td>
+                <td>{{ plant.light_level }}</td>
+                </tr>
 
-        <tr>
-        <td>Полив:</td>
-        <td>{{ plant.irrigation_level }}</td>
-        </tr>
+                <tr>
+                <td>Полив:</td>
+                <td>{{ plant.irrigation_level }}</td>
+                </tr>
 
-        <tr>
-        <td>Сложность ухода:</td>
-        <td>{{ plant.level_of_care }}</td>
-        </tr>
+                <tr>
+                <td>Сложность ухода:</td>
+                <td>{{ plant.level_of_care }}</td>
+                </tr>
 
-        <tr>
-        <td>Влажность воздуха:</td>
-        <td>{{ plant.humidity }}</td>
-        </tr>
+                <tr>
+                <td>Влажность воздуха:</td>
+                <td>{{ plant.humidity }}</td>
+                </tr>
 
-        <tr>
-        <td>Частота удобрения:</td>
-        <td>{{ plant.feeding }}</td>
-        </tr>
+                <tr>
+                <td>Частота удобрения:</td>
+                <td>{{ plant.feeding }}</td>
+                </tr>
 
-        <tr>
-        <td>Температура содержания:</td>
-        <td>{{ plant.temperature }}</td>
-        </tr>
+                <tr>
+                <td>Температура содержания:</td>
+                <td>{{ plant.temperature }}</td>
+                </tr>
                 </table>
 
 </div>

@@ -31,25 +31,26 @@
     {% cycle '' '' '' '' '</tr>' %}
   {% endfor %}
      </table>
+      <div class="footer">
+            <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo;</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">назад</a>
+                {% endif %}
+
+                <span class="current">
+                    стр. {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">вперед</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
+                {% endif %}
+            </span>
+            </div>
+      </div>
   </div>
 </div>
-<div class="footer">
-    <div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; 1 </a>
-            <a href="?page={{ page_obj.previous_page_number }}">< Назад</a>
-        {% endif %}
 
-        <span class="current">
-            стр. {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
-        </span>
-
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">Вперед ></a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">Последняя &raquo;</a>
-        {% endif %}
-    </span>
-</div>
-</div>
 {% endblock %}

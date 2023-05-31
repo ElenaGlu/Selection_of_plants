@@ -19,10 +19,10 @@ def select_plant(request):
             temperature = request.POST.getlist("temperature")
             humidity = request.POST.getlist("humidity")
             feeding = request.POST.getlist("feeding")
-            plants = HousePlants.objects.filter(level_of_care__in=level_of_care,
-                                                light_level__in=light_level, irrigation_level__in=irrigation_level,
-                                                temperature__in=temperature, humidity__in=humidity,
-                                                feeding__in=feeding)
+            filter_keys = {'level_of_care__in': level_of_care, 'light_level__in': light_level,
+                           'irrigation_level__in': irrigation_level, 'temperature__in': temperature,
+                           'humidity__in': humidity, 'feeding__in': feeding}
+            plants = HousePlants.objects.filter(**filter_keys)
         else:
             CheckBoxForm()
         paginator = Paginator(plants, 30)
