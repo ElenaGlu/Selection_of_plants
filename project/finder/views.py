@@ -1,11 +1,12 @@
 from django.shortcuts import get_object_or_404, render
 from .models import HousePlants
 from django.core.paginator import Paginator
-from .forms import CheckBoxForm
+from .forms import CheckBoxForm, meth
 
 
 def select_plant(request):
     form = CheckBoxForm(request.POST or None)
+    dict_choice = meth()
     plants = HousePlants.objects.all()
     paginator = Paginator(plants, 30)
     page_number = request.GET.get("page")
@@ -22,6 +23,10 @@ def select_plant(request):
             filter_keys = {'level_of_care__in': level_of_care, 'light_level__in': light_level,
                            'irrigation_level__in': irrigation_level, 'temperature__in': temperature,
                            'humidity__in': humidity, 'feeding__in': feeding}
+
+            for key, value in filter_keys.items():
+                if not value:
+                    filter_keys[key] = dict_choice[key]
             plants = HousePlants.objects.filter(**filter_keys)
         else:
             CheckBoxForm()
