@@ -147,7 +147,7 @@ def create_short_name() -> None:
 
 def download_main_img() -> None:
     """
-    Uploading images by link from the database.
+    Uploading images by link from the database(local).
     """
     for item in models.HousePlants.objects.all():
         name_img = item.name_of_plant
