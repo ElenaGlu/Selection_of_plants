@@ -9,6 +9,7 @@ def select_plant(request):
     form = CheckBoxForm(request.POST or None)
 
     dict_filters = filters_form()
+    dict_filters = {key: [v[0] for v in values] for key, values in dict_filters.items()}
 
     plants = HousePlants.objects.all()
     paginator = Paginator(plants, 30)
@@ -25,26 +26,13 @@ def select_plant(request):
             feeding = request.POST.getlist("feeding")
 
             selection = {
-                'level_of_care__in': level_of_care if level_of_care else list(dict_filters['level_of_care']),
-                'light_level__in': light_level,
-                'irrigation_level__in': irrigation_level,
-                'temperature__in': temperature,
-                'humidity__in': humidity,
-                'feeding__in': feeding
+                'level_of_care__in': level_of_care if level_of_care else dict_filters['level_of_care'],
+                'light_level__in': light_level if light_level else dict_filters['light_level'],
+                'irrigation_level__in': irrigation_level if irrigation_level else dict_filters['irrigation_level'],
+                'temperature__in': temperature if temperature else dict_filters['temperature'],
+                'humidity__in': humidity if humidity else dict_filters['humidity'],
+                'feeding__in': feeding if feeding else dict_filters['feeding']
             }
-            # new_selection = {}
-            # list_val = []
-            # for key, value in selection.items():
-            #     if value:
-            #         new_selection.setdefault(key, value)
-            # for key1, value1 in dict_filters.items():
-            #     if not key1 in new_selection:
-            #         for item in value1:
-            #             val = item[0]
-            #             list_val.append(val)
-            #         new_selection.setdefault(key1, list_val)
-            #         list_val = []
-
             plants = HousePlants.objects.filter(**selection)
         else:
             CheckBoxForm()
