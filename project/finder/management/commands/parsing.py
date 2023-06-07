@@ -125,7 +125,6 @@ def get_description_items() -> List[dict]:
 def create_plant_instances(list_main_info_plant: List[dict]) -> None:
     """
     Adding objects to the database.
-    :rtype: object
     """
     list_plant_instances = []
     for item in list_main_info_plant:
@@ -135,7 +134,6 @@ def create_plant_instances(list_main_info_plant: List[dict]) -> None:
 def create_short_name() -> None:
     """
     Creating a new field and adding a short name to it.
-    :rtype: object
     """
     list_short_name = []
     for item in models.HousePlants.objects.all():
