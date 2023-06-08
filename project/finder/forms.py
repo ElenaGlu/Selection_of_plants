@@ -14,7 +14,7 @@ def filters_form() -> dict:
         for key in dict_filters.keys():
             dict_filters[key].append(elem.__dict__[key])
     for key, value in dict_filters.items():
-        filter_value = list(filter(None, (set(value))))
+        filter_value = set(value)
         choices_value = tuple((item, item) for item in filter_value)
         dict_filters[key] = choices_value
     return dict_filters
