@@ -6,11 +6,11 @@ from .forms import CheckBoxForm, filters_form
 
 
 def select_plant(request):
-    form = CheckBoxForm(request.POST or None)
 
     dict_filters = filters_form()
     dict_filters = {key: [v[0] for v in values] for key, values in dict_filters.items()}
 
+    form = CheckBoxForm(request.POST or None)
     plants = HousePlants.objects.all()
     paginator = Paginator(plants, 30)
     page_number = request.GET.get("page")

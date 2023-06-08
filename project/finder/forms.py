@@ -1,5 +1,3 @@
-from typing import Tuple
-
 from django import forms
 
 from .models import HousePlants
@@ -15,7 +13,6 @@ def filters_form() -> dict:
     for elem in HousePlants.objects.all():
         for key in dict_filters.keys():
             dict_filters[key].append(elem.__dict__[key])
-
     for key, value in dict_filters.items():
         filter_value = list(filter(None, (set(value))))
         choices_value = tuple((item, item) for item in filter_value)
@@ -25,7 +22,6 @@ def filters_form() -> dict:
 
 class CheckBoxForm(forms.Form):
     dict_filters = filters_form()
-
     level_of_care = forms.MultipleChoiceField(label="Сложность ухода", widget=forms.CheckboxSelectMultiple,
                                               choices=dict_filters['level_of_care'], required=False)
     light_level = forms.MultipleChoiceField(label="Освещенность", widget=forms.CheckboxSelectMultiple,
