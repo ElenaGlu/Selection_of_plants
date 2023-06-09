@@ -1,3 +1,6 @@
+
+                        /*select_plant.html*/
+
 body {
     background-color: #ffffff;
 }
@@ -24,10 +27,28 @@ body {
     display: flex;
 }
 
+/*checkbox filter*/
+
 .side {
     flex: 40%;
     padding-top: 20px;
 }
+
+section {
+    padding-left: 10%;
+}
+section p {
+    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    font-size: 18px;
+    color: #48232d;
+    text-align: center;
+}
+.button{
+    padding-left: 35%;
+    padding-top: 25px;
+}
+
+/*plant objects (picture, name )*/
 
 .main {
     flex: 60%;
@@ -38,21 +59,22 @@ body {
     border-color: #89c27f;
 }
 
+table {
+    padding-left: 15px;
+}
+
 .footer {
     padding: 20px;
     text-align: center;
 }
 
-table {
-    padding-left: 15px;
-}
 
-.pic_name {
+.card_plant {
     height: 150px;
     width: 150px;
 
 }
-.pic_name p {
+.card_plant p {
      font-size: 12px;
      text-align: center;
      font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
@@ -69,90 +91,49 @@ table {
     object-fit: cover;
 }
 
-section p {
-    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
-    font-size: 18px;
+a {
+  text-decoration: none !important;
     color: #48232d;
-    text-align: center;
 }
 
-section {
-    padding-left: 10%;
-}
+                        /*description_plant.html*/
 
-.button{
-    padding-left: 35%;
-    padding-top: 25px;
-}
+/*table-content*/
 
-#number {
-  width: 10em;
-}
-
-#white {
-    background-color: white;
-}
-#blue {
-    background-color: blue;
-}
-#yellow {
-    background-color: yellow;
-}
-#green {
-    background-color: green;
-}
-#red {
-    background-color: red;
-}
-#orange {
-    background-color: orange;
-}
-#color {
-    background-color: white;
-}
-#pink {
-    background-color: pink;
-}
-#dark-blue {
-    background-color: darkblue;
-}
-#perl {
-    background-color: purple;
-}
-#black {
-    background-color: black;
-}
-
-.pic {
-    padding-left: 80px;
-    padding-bottom: 50px;
-    height: 350px;
-    width: 350px;
-}
-.pic img {
-    object-fit: cover;
-}
-
-.one {
-    flex: 30%;
-}
-.two {
-    flex: 60%;
-    padding-top: 60px;
-}
-
-.row1{
+.row_description{
     display: flex;
     border-radius: 60px;
     border-style: solid;
     border-color: #89c27f;
 }
 
-.name {
+.main_card {
+    flex: 30%;
+}
+
+.main_name {
     text-align: center;
     font-size: 15px;
     color: #834e46;
 }
+
+.main_pic {
+    padding-left: 80px;
+    padding-bottom: 50px;
+    height: 350px;
+    width: 350px;
+}
+.main_pic img {
+    object-fit: cover;
+}
+
+.content {
+    flex: 60%;
+    padding-top: 60px;
+}
+
+
+/*text-content*/
 
 .description h3 {
     font-size: 20px;
@@ -160,7 +141,3 @@ section {
     text-align: center;
 }
 
-a {
-  text-decoration: none !important;
-    color: #48232d;
-}

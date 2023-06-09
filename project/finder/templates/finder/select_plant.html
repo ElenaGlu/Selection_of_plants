@@ -5,52 +5,46 @@
 {% block content %}
 
 <div class="row">
-  <div class="side">
-      <section>
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <div class="button">
-                <input type="Submit" name="submit" value="Применить"/>
-            </div>
-        </form>
-      </section>
-  </div>
+    <div class="side">
+        <section>
+            <form action="" method="post">
+                  {% csrf_token %}
+                  {{ form.as_p }}
+                  <div class="button"><input type="Submit" name="submit" value="Применить"/></div>
+            </form>
+        </section>
+    </div>
 
-  <div class="main">
-      <table>
-    {% for name in page_obj %}
-    {% cycle '<tr>' '' '' '' '' %}
-      <td>
-          <div class="pic_name">
-          <div class="pic_plant">
-          <img src="{{'static/img/'}}{{name.name_of_plant}}{{'.jpg'}}" width="100%" height="100%">
-          </div>
-              <p><a href="{% url 'description_plant' pk=name.pk %}">{{ name.short_name }}</a></p></div>
-      </td>
-    {% cycle '' '' '' '' '</tr>' %}
-  {% endfor %}
-     </table>
-      <div class="footer">
+    <div class="main">
+        <table>
+            {% for name in page_obj %}
+            {% cycle '<tr>' '' '' '' '' %}
+            <td>
+                <div class="card_plant">
+                    <div class="pic_plant">
+                        <img src="{{'static/img/'}}{{name.name_of_plant}}{{'.jpg'}}" width="100%" height="100%"></div>
+                        <p><a href="{% url 'description_plant' pk=name.pk %}">{{ name.short_name }}</a></p></div>
+                </td>
+            {% cycle '' '' '' '' '</tr>' %}
+            {% endfor %}
+        </table>
+        <div class="footer">
             <div class="pagination">
-            <span class="step-links">
-                {% if page_obj.has_previous %}
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
                     <a href="?page=1">&laquo;</a>
                     <a href="?page={{ page_obj.previous_page_number }}">назад</a>
-                {% endif %}
-
-                <span class="current">
-                    стр. {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
-                </span>
-
-                {% if page_obj.has_next %}
+                    {% endif %}
+                    <span class="current">
+                        {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.</span>
+                        {% if page_obj.has_next %}
                     <a href="?page={{ page_obj.next_page_number }}">вперед</a>
                     <a href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
-                {% endif %}
-            </span>
+                    {% endif %}
+                </span>
             </div>
-      </div>
-  </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

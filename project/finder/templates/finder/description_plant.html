@@ -2,72 +2,51 @@
 {% block title %}Viva Flower Finder{% endblock %}
 
 {% block content %}
-<div class="row1">
-        <div class="one">
-                <div class="name"><td><h2>{{ plant.name_of_plant }}</h2></td></div>
-                <div class="pic">
-                        <img src="{{'../static/img/'}}{{plant.name_of_plant}}{{'.jpg'}}" width="100%" height="100%" ></div>
+<div class="row_description">
+    <div class="main_card">
+        <div class="main_name"><td><h2>{{ plant.name_of_plant }}</h2></td></div>
+        <div class="main_pic">
+            <img src="{{'../static/img/'}}{{plant.name_of_plant}}{{'.jpg'}}" width="100%" height="100%" ></div>
         </div>
 
-        <div class="two">
+        <div class="content">
                 <table>
-                <tr>
+            <tr>
                 <td>Родина:</td>
-                <td>{{ plant.homeland }}</td>
-                </tr>
+                <td>{{ plant.homeland|default_if_none:"-" }}</td></tr>
 
-                <tr>
+            <tr>
                 <td>Почва:</td>
-                <td>{{ plant.soil }}</td>
-                </tr>
-
-                <tr>
+                <td>{{ plant.soil|default_if_none:"-" }}</td></tr>
+            <tr>
                 <td>Размер:</td>
-                <td>{{ plant.min_height }} см - {{ plant.max_height }} см</td>
-                </tr>
-
-                <tr>
+                <td>{{ plant.min_height|default_if_none:""  }} см - {{ plant.max_height|default_if_none:"" }} см</td></tr>
+            <tr>
                 <td>Время цветения:</td>
-                <td>{{ plant.flowering_time }}</td>
-                </tr>
-
-                <tr>
+                <td>{{ plant.flowering_time|default_if_none:"-"  }}</td></tr>
+            <tr>
                 <td>Возможные расцветки:</td>
-                <td>{{ plant.leaf_color }}</td>
-                </tr>
-
-                <tr>
+                <td>{{ plant.leaf_color|default_if_none:"-"  }}</td></tr>
+            <tr>
                 <td>Освещенность:</td>
-                <td>{{ plant.light_level }}</td>
-                </tr>
-
-                <tr>
+                <td>{{ plant.light_level }}</td></tr>
+            <tr>
                 <td>Полив:</td>
-                <td>{{ plant.irrigation_level }}</td>
-                </tr>
-
-                <tr>
+                <td>{{ plant.irrigation_level }}</td></tr>
+            <tr>
                 <td>Сложность ухода:</td>
-                <td>{{ plant.level_of_care }}</td>
-                </tr>
-
-                <tr>
+                <td>{{ plant.level_of_care }}</td></tr>
+            <tr>
                 <td>Влажность воздуха:</td>
-                <td>{{ plant.humidity }}</td>
-                </tr>
-
-                <tr>
+                <td>{{ plant.humidity }}</td></tr>
+            <tr>
                 <td>Частота удобрения:</td>
-                <td>{{ plant.feeding }}</td>
-                </tr>
-
-                <tr>
+                <td>{{ plant.feeding }}</td></tr>
+            <tr>
                 <td>Температура содержания:</td>
-                <td>{{ plant.temperature }}</td>
-                </tr>
+                <td>{{ plant.temperature }}</td></tr>
                 </table>
-
-</div>
+        </div>
 </div>
 <div class="description">
         <h3>Описание</h3>
