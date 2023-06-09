@@ -6,12 +6,25 @@ from .forms import CheckBoxForm, filters_form
 
 
 def select_plant(request):
-
+    """
+    Displays all objects on the start page.
+    After filtering, outputs the objects corresponding to the query.
+    :param request:
+    :return: def select_plant(request: {POST, GET, method}) -> HttpResponse
+    """
     dict_filters = filters_form()
     dict_filters = {key: [v[0] for v in values] for key, values in dict_filters.items()}
 
+    start_page = {
+        'level_of_care__in': dict_filters['level_of_care'],
+        'light_level__in': dict_filters['light_level'],
+        'irrigation_level__in': dict_filters['irrigation_level'],
+        'temperature__in': dict_filters['temperature'],
+        'humidity__in': dict_filters['humidity'],
+        'feeding__in': dict_filters['feeding']
+    }
     form = CheckBoxForm(request.POST or None)
-    plants = HousePlants.objects.all()
+    plants = HousePlants.objects.filter(**start_page)
     paginator = Paginator(plants, 30)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
@@ -44,5 +57,11 @@ def select_plant(request):
 
 
 def description_plant(request, pk):
+    """
+    Directs to the page by the pk.
+    :param request:
+    :param pk:
+    :return: def description_plant(request: Any, pk: Any) -> HttpResponse
+    """
     plant = get_object_or_404(HousePlants, pk=pk)
     return render(request, 'finder/description_plant.html', {'plant': plant})

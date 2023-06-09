@@ -6,7 +6,11 @@ from finder import models
 from finder.forms import filters_form
 
 
-def complete_db():
+def complete_db() -> None:
+    """
+    Fills the items with a value of None in the database: HousePlants,
+    the random value of the possible values from the dictionary dict_filter.
+    """
     dict_filters = filters_form()
     dict_filters = {key: [v[0] for v in values] for key, values in dict_filters.items()}
 
@@ -15,8 +19,8 @@ def complete_db():
     for item in models.HousePlants.objects.all():
         flag = False
         for key in dict_filters.keys():
-            atr = getattr(item, key)
-            if atr is None:
+            attribute = getattr(item, key)
+            if attribute is None:
                 flag = True
                 setattr(item, key, rd.choice(dict_filters[key]))
         if flag:
