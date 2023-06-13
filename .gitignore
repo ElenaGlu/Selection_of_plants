@@ -1,4 +1,3 @@
 __pycache__/
 *.exe
-../.idea/misc.xml
-../.idea/site.iml
+.idea/
