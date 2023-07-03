@@ -19,7 +19,7 @@ from django.urls import path
 from finder import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', views.select_plant, name='select_plant'),
     path('<int:pk>/', views.description_plant, name='description_plant'),
+    path('admin/', admin.site.urls),
 ]
