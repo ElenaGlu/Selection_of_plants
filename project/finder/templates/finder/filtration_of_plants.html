@@ -23,7 +23,7 @@
                 <div class="card_plant">
                     <div class="pic_plant">
                         <img src="{{'static/img/'}}{{name.name_of_plant}}{{'.jpg'}}" width="100%" height="100%"></div>
-                        <p><a href="{% url 'description_plant' pk=name.pk %}">{{ name.short_name }}</a></p></div>
+                        <p><a href="{% url 'displays_description_of_specific_plant' pk=name.pk %}">{{ name.short_name }}</a></p></div>
                 </td>
             {% cycle '' '' '' '' '</tr>' %}
             {% endfor %}
