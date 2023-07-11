@@ -69,8 +69,8 @@ DATABASES = {
         'NAME': c.KEY_NAME,
         'USER': c.KEY_USER,
         'PASSWORD': c.KEY_PASSWORD,
-        'HOST': c.KEY_HOST,
-        'PORT': c.KEY_PORT,
+        'HOST': 'localhost',
+        'PORT': 5432,
     }
 }
 

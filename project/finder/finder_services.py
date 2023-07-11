@@ -4,18 +4,17 @@ from django.core.paginator import Paginator
 
 
 def creates_filters_for_checkbox_form() -> dict:
+
     """
     Функция создает словарь для чекбоксформ, и заполняет его уникальными значениями в виде кортежа.
     :return: словарь, где ключ-название фильтра, значение-варианты выбора.
     """
     filters_for_checkbox_form = {'level_of_care': [], 'light_level': [], 'irrigation_level': [],
-                                 'temperature': [], 'humidity': [], 'feeding': []}
-    for elem in HousePlants.objects.all():
-        for key in filters_for_checkbox_form.keys():
-            filters_for_checkbox_form[key].append(elem.__dict__[key])
+                                 'temperature': [], 'humidity':  [], 'feeding': []}
+    filters_for_checkbox_form = {k: HousePlants.objects.all().values_list(k, flat=True).distinct() for k, v in
+                                 filters_for_checkbox_form.items()}
     for key, value in filters_for_checkbox_form.items():
-        selection_unique_values = set(value)
-        values_for_checkbox_form = tuple((item, item) for item in selection_unique_values)
+        values_for_checkbox_form = tuple((item, item) for item in value)
         filters_for_checkbox_form[key] = values_for_checkbox_form
     return filters_for_checkbox_form
 
