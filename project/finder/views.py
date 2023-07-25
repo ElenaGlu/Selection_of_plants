@@ -15,10 +15,12 @@ def displays_plants_by_filters(request: HttpRequest) -> HttpResponse:
     form = CheckBoxForm(request.POST or None)
     page_number = request.GET.get("page")
     if request.method == "GET":
-        page_obj = fs.generates_page_by_filters(page_number, fs.creates_default_filters_for_start_page())
+        page_obj = fs.generates_page_by_filters(page_number,
+                                                fs.creates_default_filters_for_start_page(fs.converts_dictionary()))
     if request.method == "POST":
         if form.is_valid():
-            page_obj = fs.generates_page_by_filters(page_number, fs.changing_value_of_filters(request))
+            page_obj = fs.generates_page_by_filters(page_number,
+                                                    fs.changing_value_of_filters(request, fs.converts_dictionary()))
 
     return render(request, 'finder/filtration_of_plants.html', {'form': form, 'page_obj': page_obj})
 
@@ -27,7 +29,7 @@ def displays_description_of_specific_plant(request: HttpRequest, pk: int) -> Htt
     """
        displays description of specific plant
        :param request: http request
-       :param pk: id in model
+       :param pk: int
        :return: HTML page with description of specific plant
        """
     plant = get_object_or_404(HousePlants, pk=pk)

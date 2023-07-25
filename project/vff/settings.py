@@ -30,6 +30,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'finder.middleware.middleware.timing',
+
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
