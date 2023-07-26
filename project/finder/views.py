@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponse, HttpRequest
+from django.http import HttpResponse, HttpRequest, Http404
 
 from .models import HousePlants
 from .forms import CheckBoxForm
@@ -32,5 +32,8 @@ def displays_description_of_specific_plant(request: HttpRequest, pk: int) -> Htt
        :param pk: int
        :return: HTML page with description of specific plant
        """
-    plant = get_object_or_404(HousePlants, pk=pk)
+    if request.method == "POST":
+        plant = get_object_or_404(HousePlants, pk=pk)
+    else:
+        raise Http404()
     return render(request, 'finder/description_plant.html', {'plant': plant})

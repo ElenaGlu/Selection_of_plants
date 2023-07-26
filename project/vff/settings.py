@@ -30,7 +30,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'finder.middleware.middleware.timing',
+    'finder.middleware.middleware.CustomErrorMiddleware',
 
 
     'django.middleware.security.SecurityMiddleware',
