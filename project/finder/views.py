@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import render
 from django.http import HttpResponse, HttpRequest, Http404
 
 from .models import HousePlants
@@ -32,8 +32,9 @@ def displays_description_of_specific_plant(request: HttpRequest, pk: int) -> Htt
        :param pk: int
        :return: HTML page with description of specific plant
        """
-    if request.method == "POST":
-        plant = get_object_or_404(HousePlants, pk=pk)
-    else:
+
+    try:
+        plant = HousePlants.objects.get(pk=pk)
+    except HousePlants.DoesNotExist:
         raise Http404()
     return render(request, 'finder/description_plant.html', {'plant': plant})

@@ -12,6 +12,6 @@ class CustomErrorMiddleware:
 
     def process_exception(self, request, exception):
         if isinstance(exception, Http404):
-            return render(request, '404.html', status=404)
+            return render(request, 'finder/404.html', status=404)
         else:
-            return render(request, '500.html', status=500)
+            return render(request, 'finder/500.html', status=500)
