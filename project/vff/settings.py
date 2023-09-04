@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from project import config as c
+import config as c
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

@@ -3,7 +3,7 @@ import random as rd
 from django.core.management.base import BaseCommand
 
 from finder import models
-from finder.forms import filters_form
+from finder.finder_services import converts_dictionary
 
 
 def complete_db() -> None:
@@ -11,8 +11,7 @@ def complete_db() -> None:
     Fills the items with a value of None in the database: HousePlants,
     the random value of the possible values from the dictionary dict_filter.
     """
-    dict_filters = filters_form()
-    dict_filters = {key: [v[0] for v in values] for key, values in dict_filters.items()}
+    dict_filters = converts_dictionary()
 
     list_update = []
 
