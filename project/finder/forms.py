@@ -1,10 +1,10 @@
 from django import forms
 
-from .finder_services import creates_choices_for_widgets
+from .finder_services import Filters
 
 
 class CheckBoxForm(forms.Form):
-    choices_for_widgets = creates_choices_for_widgets()
+    choices_for_widgets = Filters.creates_choices_for_widgets()
     level_of_care = forms.MultipleChoiceField(label="Сложность ухода", widget=forms.CheckboxSelectMultiple,
                                               choices=choices_for_widgets['level_of_care'], required=False)
     light_level = forms.MultipleChoiceField(label="Освещенность", widget=forms.CheckboxSelectMultiple,
