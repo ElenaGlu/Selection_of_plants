@@ -1,12 +1,80 @@
 from django.test import TestCase
 from django.urls import reverse
 
+from ..finder_services import Filters
+
 
 class FiltersTests(TestCase):
-    """
-    Requests a html page and checks its status code and the correctness of the template.
-    """
-    def test_filtration_of_plants(self):
+
+    def test_displays_plants_by_filters(self):
+        """
+        Requests a html page and checks its status code and the correctness of the template.
+        """
         response = self.client.get(reverse("displays_plants_by_filters"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "finder/filtration_of_plants.html")
+
+    def test_converts_dictionary(self):
+        """
+        Checks that the dictionary values from the tuple have changed to the list, and removes duplication.
+        """
+        expected_input = {
+            'level_of_care': (
+                ('Много// Требовательно в уходе (холодная зимовка, досветка, укрытие (в саду) и т.д.)',
+                'Много// Требовательно в уходе (холодная зимовка, досветка, укрытие (в саду) и т.д.)'),
+                ('Мало// Не нуждается в особых требованиях для роста и цветения',
+                'Мало// Не нуждается в особых требованиях для роста и цветения'),
+                ('Средне// В целом неприхотливо, может предъявлять особые для данного вида требования',
+                'Средне// В целом неприхотливо, может предъявлять особые для данного вида требования')
+            ),
+            'light_level': (
+                ('Средне// Допустимы прямые лучи несколько часов, восточная, западная ориентация',
+                'Средне// Допустимы прямые лучи несколько часов, восточная, западная ориентация'),
+                ('Много// Западная, южная ориентация, может потребовать несколько часов прямых солнечных лучей',
+                'Много// Западная, южная ориентация, может потребовать несколько часов прямых солнечных лучей'),
+                ('Мало// Теневыносливо',
+                'Мало// Теневыносливо')
+            )
+        }
+
+        expected_output = {
+            'level_of_care': [
+                'Много// Требовательно в уходе (холодная зимовка, досветка, укрытие (в саду) и т.д.)',
+                'Мало// Не нуждается в особых требованиях для роста и цветения',
+                'Средне// В целом неприхотливо, может предъявлять особые для данного вида требования'],
+            'light_level': [
+                'Средне// Допустимы прямые лучи несколько часов, восточная, западная ориентация',
+                'Много// Западная, южная ориентация, может потребовать несколько часов прямых солнечных лучей',
+                'Мало// Теневыносливо']
+        }
+
+        resp = Filters.converts_dictionary(expected_input)
+        self.assertEqual(resp, expected_output)
+
+    def test_creates_default_filters_for_start_page(self):
+        """
+        Checks the correctness of the created default filters.
+        """
+        expected_input = {
+            'level_of_care': [
+                'Много// Требовательно в уходе (холодная зимовка, досветка, укрытие (в саду) и т.д.)',
+                'Мало// Не нуждается в особых требованиях для роста и цветения',
+                'Средне// В целом неприхотливо, может предъявлять особые для данного вида требования'],
+            'light_level': [
+                'Средне// Допустимы прямые лучи несколько часов, восточная, западная ориентация',
+                'Много// Западная, южная ориентация, может потребовать несколько часов прямых солнечных лучей',
+                'Мало// Теневыносливо']
+        }
+        expected_output = {
+            'level_of_care__in': [
+                'Много// Требовательно в уходе (холодная зимовка, досветка, укрытие (в саду) и т.д.)',
+                'Мало// Не нуждается в особых требованиях для роста и цветения',
+                'Средне// В целом неприхотливо, может предъявлять особые для данного вида требования'],
+            'light_level__in': [
+                'Средне// Допустимы прямые лучи несколько часов, восточная, западная ориентация',
+                'Много// Западная, южная ориентация, может потребовать несколько часов прямых солнечных лучей',
+                'Мало// Теневыносливо']
+             }
+        resp = Filters.creates_default_filters_for_start_page(expected_input)
+        self.assertEqual(resp, expected_output)
+

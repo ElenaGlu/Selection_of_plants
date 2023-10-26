@@ -1,12 +1,12 @@
+import json
+from typing import List
+
 from django.core.management.base import BaseCommand
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 import urllib.request
-import json
-
-from typing import List
 
 from finder import models
 
@@ -29,7 +29,7 @@ def get_links_pagination() -> List[str]:
 def get_links_to_all_items(list_links_pagination: List[str])-> None:
     """
     Iterated through a list of links in the form of strings for pagination.
-    Collects links to all items and adds them to a new list.
+    Collect links to all items and adds them to a new list.
     Data from the new list is written to a json file.
     """
     list_links_to_all_items = []

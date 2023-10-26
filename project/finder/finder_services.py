@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator
 from django.db.models.query import QuerySet
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest
 
 from .models import HousePlants
 
@@ -20,38 +20,45 @@ class Filters:
                                choices_for_widgets.items()}
         return {k: tuple((item, item) for item in v) for k, v in choices_for_widgets.items()}
 
-    def converts_dictionary(self) -> dict:
+    @staticmethod
+    def converts_dictionary(choices_for_widgets) -> dict:
         """
         Converts dictionary values from a tuple to a list and removes duplication.
+        :param choices_for_widgets: Example {"level_of_care": (("small", "small"),
+                                            ("medium", "medium"),("high", "high")), }
         :return: Dictionary. Example {"level_of_care": ["small", "medium", "high"], }
         """
-        return {key: [v[0] for v in values] for key, values in self.creates_choices_for_widgets().items()}
+        return {key: [v[0] for v in values] for key, values in choices_for_widgets.items()}
 
-    def creates_default_filters_for_start_page(self) -> dict:
+    @staticmethod
+    def creates_default_filters_for_start_page(dictionary_with_filters) -> dict:
         """
         Creates default filters for start page.
+        :param dictionary_with_filters: Example {"level_of_care": ["small", "medium", "high"], }
         :return: Dictionary. Example {"level_of_care__in": ["small", "medium", "high"], }
         """
-        return {f'{k}__in': v for k, v in self.converts_dictionary().items()}
+        return {f'{k}__in': v for k, v in dictionary_with_filters.items()}
 
-    def changing_value_of_filters(self, request: HttpRequest) -> dict:
+    @staticmethod
+    def changing_value_of_filters(request: HttpRequest, dictionary_with_filters) -> dict:
         """
         Changing value of filters for page.
-        param request: Http Request
+        :param request: Http Request
+        :param dictionary_with_filters: Example {"level_of_care__in": ["small", "medium", "high"], }
         :return: Dictionary. Example {"level_of_care__in": ["small", "medium", "high"], }
         """
         return {f'{k}__in': request.POST.getlist(k) if request.POST.getlist(k) else v for k, v in
-                self.converts_dictionary().items()}
+                dictionary_with_filters.items()}
 
     @staticmethod
-    def generates_page_by_filters(page_number: HttpResponse, dict_with_filter: dict) -> QuerySet:
+    def generates_page_by_filters(page_number: int, specific_filter: dict) -> QuerySet:
         """
         Uses a paginator to split a QuerySet into Page objects.
-        param: page_number - Http Response,
-        param: dict_with_filter - dict
-        :return: Page objects
+        :param page_number: int
+        :param specific_filter: Example {"level_of_care__in": ["small", "medium", "high"], }
+        :return: QuerySet
         """
-        obj = HousePlants.objects.filter(**dict_with_filter)
+        obj = HousePlants.objects.filter(**specific_filter)
         paginator = Paginator(obj, 30)
         page_obj = paginator.get_page(page_number)
 
