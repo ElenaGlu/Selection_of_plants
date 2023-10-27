@@ -38,7 +38,7 @@ def displays_description_of_specific_plant(request: HttpRequest, pk: int) -> Htt
     """
     Displays description of specific plant.
     :param request: Http Request
-    :param pk: int
+    :param pk: id object in data base
     :return: HTML page with description of specific plant
     """
     try:
