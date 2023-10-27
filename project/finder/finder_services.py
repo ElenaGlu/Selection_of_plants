@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator
 from django.db.models.query import QuerySet
-from django.http import HttpRequest
+from django.utils.datastructures import MultiValueDict
 
 from .models import HousePlants
 
@@ -40,14 +40,14 @@ class Filters:
         return {f'{k}__in': v for k, v in dictionary_with_filters.items()}
 
     @staticmethod
-    def changing_value_of_filters(request: HttpRequest, dictionary_with_filters) -> dict:
+    def changing_value_of_filters(request_data: MultiValueDict, dictionary_with_filters) -> dict:
         """
         Changing value of filters for page.
-        :param request: Http Request
+        :param request_data:
         :param dictionary_with_filters: example {"level_of_care__in": ["small", "medium", "high"], }
         :return: dict, example {"level_of_care__in": ["small", "medium", "high"], }
         """
-        return {f'{k}__in': request.POST.getlist(k) if request.POST.getlist(k) else v for k, v in
+        return {f'{k}__in': request_data.getlist(k) if request_data.getlist(k) else v for k, v in
                 dictionary_with_filters.items()}
 
     @staticmethod

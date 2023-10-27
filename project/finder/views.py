@@ -26,7 +26,7 @@ def displays_plants_by_filters(request: HttpRequest) -> HttpResponse:
         )
     if request.method == "POST":
         if form.is_valid():
-            changing_filter = obj_filter.changing_value_of_filters(request, dictionary_with_filters)
+            changing_filter = obj_filter.changing_value_of_filters(request.POST, dictionary_with_filters)
             page_obj = obj_filter.generates_page_by_filters(
                 page_number, changing_filter
             )
