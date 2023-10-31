@@ -1,5 +1,5 @@
 {% load static %}
-<!DOCTYPE html>
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +16,6 @@
 <div class="header">
   <h1>{% block h1 %} <a href="{% url 'displays_plants_by_filters' %}"> Viva Flower Finder{% endblock %} </a> </h1>
   <h4>{% block h4 %}will help you choose a houseplant according to your request{% endblock %}</h4>
-
 </div>
     <div id="content">
         {% block content %}

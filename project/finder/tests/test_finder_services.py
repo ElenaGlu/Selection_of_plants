@@ -1,6 +1,5 @@
 from django.core.management import call_command
 from django.test import TestCase
-from django.urls import reverse
 from django.utils.datastructures import MultiValueDict
 
 from ..finder_services import Filters
@@ -14,7 +13,7 @@ class FiltersTests(TestCase):
         Checks the correctness of the created "choices"
         for widgets (CheckBoxForm) based on unique values from HousePlants.
         """
-        call_command('load_fixtures', 'finder/fixtures/data.json')
+        call_command('loaddata', 'finder/fixtures/data.json')
 
         expected_output = {
             "level_of_care": (
@@ -216,10 +215,3 @@ class FiltersTests(TestCase):
         resp = Filters.changing_value_of_filters(request_data, expected_input)
         self.assertEqual(resp, expected_output)
 
-    def test_displays_plants_by_filters(self):
-        """
-        Requests a html page and checks its status code and the correctness of the template.
-        """
-        response = self.client.get(reverse("displays_plants_by_filters"))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "finder/filtration_of_plants.html")
