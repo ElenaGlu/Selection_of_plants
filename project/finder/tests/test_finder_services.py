@@ -5,7 +5,7 @@ from django.utils.datastructures import MultiValueDict
 from ..finder_services import Filters
 
 
-class FiltersTests(TestCase):
+class FinderServicesTests(TestCase):
     fixtures = ['data.json', ]
 
     def test_creates_choices_for_widgets(self):
