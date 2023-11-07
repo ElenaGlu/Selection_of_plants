@@ -19,10 +19,10 @@ cd project
 ```
 ### В директории project создайте файл `.env` и заполните данными:
 ```
-DJANGO_KEY_USER = 'django-insecure-#x=(=j7e8kcz6h@x^yolqcky526ngg1=-zh&n9#5j2232t77#p'
-KEY_NAME = 'vff'
-KEY_USER = 'lena'
-KEY_PASSWORD = '1'
+DJANGO_KEY_USER = 'key'
+KEY_NAME = 'name'
+KEY_USER = 'user'
+KEY_PASSWORD = 'key'
 ```
 ### Установите требуемые зависимости
 
