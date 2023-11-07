@@ -18,12 +18,12 @@ cd project
     source venv/bin/activate     #для Linux
 ```
 ### В директории project создайте файл `.env` и заполните данными:
-
+```
 DJANGO_KEY_USER = 'django-insecure-#x=(=j7e8kcz6h@x^yolqcky526ngg1=-zh&n9#5j2232t77#p'
 KEY_NAME = 'vff'
 KEY_USER = 'lena'
 KEY_PASSWORD = '1'
-
+```
 ### Установите требуемые зависимости
 
 Выполните команду в терминале 
