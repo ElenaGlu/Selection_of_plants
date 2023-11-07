@@ -24,14 +24,20 @@ KEY_NAME = 'name'
 KEY_USER = 'user'
 KEY_PASSWORD = 'key'
 ```
-### Установите требуемые зависимости
+### Установите требуемые зависимости:
 
 Выполните команду в терминале 
 ```
 pip install -r requirements.txt
 ```
+### Наполните базу данных содержимым файла dump.sql из директории dump:
 
-### Запустите проект
+```
+sudo -u postgres -i psql databasename < dump.sql
+
+python manage.py migrate      #проверить миграции
+```
+### Запустите проект:
 
 ```
 python manage.py runserver
