@@ -45,3 +45,6 @@ python manage.py runserver
 
 - После запуска проект будут доступен по адресу: [http://localhost/](http://localhost/)
   
+![image](https://github.com/ElenaGlu/site/assets/123466535/7a1c21aa-3852-46b3-9286-b6a058b3d4be)
+![image](https://github.com/ElenaGlu/site/assets/123466535/26fcd839-5fd4-4b5f-a438-5f454fcdb899)
+
