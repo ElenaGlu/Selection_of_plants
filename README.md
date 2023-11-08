@@ -3,7 +3,7 @@
 Есть возможность открыть каждое растение и изучить подробную информацию о нем.
  
 ### Технологии:
-Python3, Django, PostgreSQL
+Python3, Django, PostgreSQL, selenium, beautifulsoup4
 
 ### Запуск проекта на локальной машине:
 
