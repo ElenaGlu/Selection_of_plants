@@ -4,36 +4,36 @@
 {% block content %}
 <div class="row_description">
     <div class="main_card">
-        <div class="main_name"><td><h2>{{ plant.name_of_plant }}</h2></td></div>
+        <div class="main_name"><td><h2>{{ plant.full_name }}</h2></td></div>
         <div class="main_pic">
-            <img src="{{'../static/img/'}}{{plant.name_of_plant}}{{'.jpg'}}" width="100%" height="100%" ></div>
+            <img src="{{'../static/img/'}}{{plant.full_name}}{{'.jpg'}}" width="100%" height="100%" ></div>
         </div>
         <div class="content">
                 <table>
             <tr>
                 <td>Родина:</td>
-                <td>{{ plant.homeland|default_if_none:"-" }}</td></tr>
+                <td>{{ content.region }}</td></tr>
             <tr>
                 <td>Почва:</td>
-                <td>{{ plant.soil|default_if_none:"-" }}</td></tr>
+                <td>{{ content.soil}}</td></tr>
             <tr>
                 <td>Размер:</td>
                 <td>{{ plant.min_height|default_if_none:""  }} см - {{ plant.max_height|default_if_none:"" }} см</td></tr>
-            <tr>
+             <tr>
                 <td>Время цветения:</td>
-                <td>{{ plant.flowering_time|default_if_none:"-"  }}</td></tr>
+                <td>{{ content.flowering_time }}</td></tr>
             <tr>
                 <td>Возможные расцветки:</td>
-                <td>{{ plant.leaf_color|default_if_none:"-"  }}</td></tr>
+                <td>{{ content.leaf_color }}</td></tr>
             <tr>
                 <td>Освещенность:</td>
-                <td>{{ plant.light_level }}</td></tr>
+                <td>{{ plant.light }}</td></tr>
             <tr>
                 <td>Полив:</td>
-                <td>{{ plant.irrigation_level }}</td></tr>
+                <td>{{ plant.irrigation }}</td></tr>
             <tr>
                 <td>Сложность ухода:</td>
-                <td>{{ plant.level_of_care }}</td></tr>
+                <td>{{ plant.care }}</td></tr>
             <tr>
                 <td>Влажность воздуха:</td>
                 <td>{{ plant.humidity }}</td></tr>
@@ -48,6 +48,6 @@
 </div>
 <div class="description">
         <h3>Описание</h3>
-        {{ plant.content_or_description }}
+        {{ plant.content }}
 </div>
 {% endblock %}

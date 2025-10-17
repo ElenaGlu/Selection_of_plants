@@ -1,23 +1,43 @@
 from django import forms
 
-from .finder_services import Filters
+from .models import Care, Light, Irrigation, Temperature, Humidity, Feeding
 
 
 class CheckBoxForm(forms.Form):
-    choices_for_widgets = Filters.creates_choices_for_widgets()
-    level_of_care = forms.MultipleChoiceField(label="Сложность ухода", widget=forms.CheckboxSelectMultiple,
-                                              choices=choices_for_widgets['level_of_care'], required=False)
-    light_level = forms.MultipleChoiceField(label="Освещенность", widget=forms.CheckboxSelectMultiple,
-                                            choices=choices_for_widgets['light_level'],
-                                            required=False)
-    irrigation_level = forms.MultipleChoiceField(label="Полив", widget=forms.CheckboxSelectMultiple,
-                                                 choices=choices_for_widgets['irrigation_level'],
-                                                 required=False)
-    temperature = forms.MultipleChoiceField(label="Температура содержания", widget=forms.CheckboxSelectMultiple,
-                                            choices=choices_for_widgets['temperature'], required=False)
-    humidity = forms.MultipleChoiceField(label="Влажность воздуха", widget=forms.CheckboxSelectMultiple,
-                                         choices=choices_for_widgets['humidity'],
-                                         required=False)
-    feeding = forms.MultipleChoiceField(label="Частота удобрения", widget=forms.CheckboxSelectMultiple,
-                                        choices=choices_for_widgets['feeding'],
-                                        required=False)
+
+    care = forms.ModelMultipleChoiceField(
+        queryset=Care.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        label="Сложность ухода",
+        required=False
+    )
+    light = forms.ModelMultipleChoiceField(
+        queryset=Light.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        label="Освещенность",
+        required=False
+    )
+    irrigation = forms.ModelMultipleChoiceField(
+        queryset=Irrigation.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        label="Полив",
+        required=False
+    )
+    temperature = forms.ModelMultipleChoiceField(
+        queryset=Temperature.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        label="Температура содержания",
+        required=False
+    )
+    humidity = forms.ModelMultipleChoiceField(
+        queryset=Humidity.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        label="Влажность воздуха",
+        required=False
+    )
+    feeding = forms.ModelMultipleChoiceField(
+        queryset=Feeding.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        label="Частота удобрения",
+        required=False
+    )
